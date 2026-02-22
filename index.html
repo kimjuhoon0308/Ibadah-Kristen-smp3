@@ -1,0 +1,1969 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Siswa Kristen SMPN 3 Makassar</title>
+</head>
+<body style="font-family: sans-serif; background-color: #f0f2f5; margin: 0; padding: 20px; color: #333;">
+
+    <div style="background-color: #2c3e50; color: white; padding: 30px; text-align: center; border-radius: 15px; margin-bottom: 20px;">
+       <h1>Persekutuan Siswa Kristen UPT SPF SMP Negeri 3 Makassar</h1>
+        <p style="font-style: italic; margin-top: 10px; font-size: 14px;">"Janganlah takut, sebab Aku menyertai engkau, janganlah bimbang, sebab Aku ini Allahmu; Aku akan meneguhkan, bahkan akan menolong engkau; Aku akan memegang engkau dengan tangan kanan-Ku yang membawa kemenangan. 
+</i></p>
+           <small>— Yesaya 41:10
+              </div>
+              
+    <h2 style="text-align: center;">Jadwal Ibadah</h2>
+    <div id="jadwal-list"></div>
+
+    <div style="background-color: white; padding: 20px; border-radius: 15px; margin-top: 30px; box-shadow: 0 4px 6px rgba(0,0,0,0.1); text-align: center;">
+        <h2 style="margin-top: 0; color: #2c3e50;">Data Kehadiran</h2>
+        <p id="tgl-absen" style="font-weight: bold; color: #7f8c8d; margin-bottom: 20px;"></p>
+        
+        <div style="display: flex; flex-wrap: wrap; justify-content: center; gap: 10px;">
+            <div style="background: #eafaf1; border: 1px solid #2ecc71; padding: 15px; border-radius: 10px; width: 120px;">
+                <h3 id="abs-hadir" style="margin: 0; font-size: 28px; color: #2ecc71;">0</h3>
+                <p style="margin: 5px 0 0; font-size: 12px; font-weight: bold;">HADIR</p>
+            </div>
+            <div style="background: #fef9e7; border: 1px solid #f1c40f; padding: 15px; border-radius: 10px; width: 120px;">
+                <h3 id="abs-sakit" style="margin: 0; font-size: 28px; color: #f1c40f;">0</h3>
+                <p style="margin: 5px 0 0; font-size: 12px; font-weight: bold;">SAKIT</p>
+            </div>
+            <div style="background: #ebf5fb; border: 1px solid #3498db; padding: 15px; border-radius: 10px; width: 120px;">
+                <h3 id="abs-izin" style="margin: 0; font-size: 28px; color: #3498db;">0</h3>
+                <p style="margin: 5px 0 0; font-size: 12px; font-weight: bold;">IZIN</p>
+            </div>
+            <div style="background: #fdedec; border: 1px solid #e74c3c; padding: 15px; border-radius: 10px; width: 120px;">
+                <h3 id="abs-alpha" style="margin: 0; font-size: 28px; color: #e74c3c;">0</h3>
+                <p style="margin: 5px 0 0; font-size: 12px; font-weight: bold;">ALPHA</p>
+            </div>
+        </div>
+    </div>
+  
+    <script>
+        // 1. DATA JADWAL (Tambah jadwal baru di sini)
+        const daftarIbadah = [
+             {
+                nama: "Kelas VII, VIII.7 & IX",
+                tgl: "2026-02-25", 
+                liturgis: "Vinel Natania Bela",
+                syafaat: " Rayen Oktavianus",
+                persembahan: "Eunike Oktivania Rande"
+            },
+             {
+                nama: "Kelas VIII.3 & VIII.11",
+                tgl: "2026-02-24", 
+                liturgis: "Viktorya Geno Vevat",
+                syafaat: " Valencia Vina Jessica Palembangan",
+                persembahan: "Arsel Biro Sambeko"
+            },
+             {
+                nama: "Kelas VIII",
+                tgl: "2026-02-11", 
+                liturgis: "Alicia Dwi Kristiani",
+                syafaat: " Alicia Quinnisa",
+                persembahan: "Chalfin Christopher Robo"
+            },
+             {
+                nama: "Kelas VII & IX",
+                tgl: "2026-02-10", 
+                liturgis: "Kenzie Marien Priambada",
+                syafaat: " Imanuel Jonry Parinussa",
+                persembahan: "Joshua Aurellio Parinussa"
+            },
+             {
+                nama: "Kelas VIII.7, VIII.11 & IX",
+                tgl: "2026-02-04", 
+                liturgis: "Keanu Michael Pondaag",
+                syafaat: " Marvilya Vacesly",
+                persembahan: "Frederic Deriliano Iwan"
+            },
+             {
+                nama: "Kelas VII & VIII.3",
+                tgl: "2026-02-03", 
+                liturgis: "Destri Todi Payung",
+                syafaat: "Viola Jensiana Dona",
+                persembahan: "Clay Nathanael Korompis"
+            },
+            {
+                nama: "Kelas VII, VIII.3 & VIII.11",
+                tgl: "2026-01-27", 
+                liturgis: "Julietri Langi' Lebok",
+                syafaat: " Widya Nisa Tiranda",
+                persembahan: "Azareel Obet Kabanga"
+            },
+            {
+                nama: "Kelas VIII.3 & IX",
+                tgl: "2026-01-21", 
+                liturgis: "Attaya Kayza",
+                syafaat: "Maria Chinthya Tandiayu",
+                persembahan: "Lionel Dave Febrianto"
+            },
+            {
+                nama: "Kelas VII, VIII.7, VIII.11",
+                tgl: "2026-01-20", 
+                liturgis: "Michael Jonathan Tandisau",
+                syafaat: "Andi Melody Emmanuela",
+                persembahan: "Rigel Mikhael Tosuly"
+            },
+            {
+                nama: "Kelas VIII",
+                tgl: "2026-01-14", 
+                liturgis: "Frederica Dolorosa Ponggawa",
+                syafaat: "Natalia Dealova Cheysia Jebaut",
+                persembahan: "Jacqualine Mychel Noya (SAKIT SAAT BERTUGAS)"
+            },
+            {
+                nama: "Kelas VII & IX",
+                tgl: "2026-01-13", 
+                liturgis: "Jesicha Reynata Augreina",
+                syafaat: "Catharine Cheryl",
+                persembahan: "Willy Obeth Rante"
+            }
+        ];
+
+        // 2. DATA ABSENSI (Ganti angka di sini setelah ibadah selesai)
+        const dataAbsensi = {
+            keterangan: "Ibadah Terakhir: Rabu, 11 Februari 2026",
+            hadir: 43,
+            sakit: 2,
+            izin: 3,
+            alpha: 9
+        };
+
+        // FUNGSI RENDER JADWAL
+        function jalankanWeb() {
+            const wadahJadwal = document.getElementById('jadwal-list');
+            
+            // Ambil tanggal hari ini dan hilangkan jamnya (Set ke 00:00:00)
+            const hariIni = new Date();
+            hariIni.setHours(0, 0, 0, 0);
+
+            let htmlJadwal = "";
+            daftarIbadah.forEach(item => {
+                // Ambil tanggal ibadah dan hilangkan jamnya juga
+                const tglIbadah = new Date(item.tgl);
+                tglIbadah.setHours(0, 0, 0, 0);
+
+                // Hitung selisih hari dengan cara yang lebih akurat
+                const selisihMili = tglIbadah.getTime() - hariIni.getTime();
+                const selisih = Math.round(selisihMili / (1000 * 60 * 60 * 24));
+
+                let label = "";
+                let warnaLabel = "#95a5a6";
+
+                // SEKARANG CEKNYA PAKAI ATURAN INI:
+                if (selisih === 0) {
+                    label = "HARI INI";
+                    warnaLabel = "#e74c3c"; // Merah
+                } else if (selisih > 0 && selisih <= 14) {
+                    label = "MENDATANG";
+                    warnaLabel = "#f1c40f"; // Kuning
+                   }  else if (selisih < 0) {
+                    label = "SELESAI";
+                    warnaLabel = "#3498db"; // Biru
+                }
+
+                htmlJadwal += `
+                    <div style="background: white; padding: 15px; border-radius: 12px; margin-bottom: 15px; position: relative; border-left: 5px solid ${warnaLabel}; box-shadow: 0 2px 4px rgba(0,0,0,0.05);">
+                        ${label ? `<span style="float: right; background: ${warnaLabel}; color: ${selisih === 0 ? 'white' : 'black'}; padding: 4px 8px; border-radius: 5px; font-size: 10px; font-weight: bold;">${label}</span>` : ''}
+                        <strong style="font-size: 16px;">${item.nama}</strong><br>
+                        <small style="color: #7f8c8d;">${item.tgl}</small>
+                        <div style="margin-top: 10px; padding-top: 10px; border-top: 1px solid #eee; font-size: 13px;">
+                            <b>Liturgis:</b> ${item.liturgis} | <b>Persembahan:</b> ${item.persembahan} | <b>Syafaat:</b> ${item.syafaat}
+                        </div>
+                    </div>
+                `;
+            });
+            wadahJadwal.innerHTML = htmlJadwal;
+
+            // Tampilkan Absensi
+            document.getElementById('tgl-absen').innerText = dataAbsensi.keterangan;
+            document.getElementById('abs-hadir').innerText = dataAbsensi.hadir;
+            document.getElementById('abs-sakit').innerText = dataAbsensi.sakit;
+            document.getElementById('abs-izin').innerText = dataAbsensi.izin;
+            document.getElementById('abs-alpha').innerText = dataAbsensi.alpha;
+
+
+        }
+        
+        window.onload = jalankanWeb;
+    </script>
+    <div style="background-color: white; padding: 20px; border-radius: 15px; margin-top: 20px; box-shadow: 0 4px 6px rgba(0,0,0,0.1);">
+    <h3 style="text-align: center; color: #2c3e50; margin-bottom: 20px;">Daftar Nama Tidak Hadir</h3>
+          <p style="font-size: 15px; color: #2c3e50; margin-top: 15px; text-align: left;">Selasa, 10 Februari 2026.
+    <table style="width: 100%; border-collapse: collapse;">
+        <thead>
+            <tr style="background-color: #f2f2f2; border-bottom: 2px solid #ddd;">
+                <th style="padding: 10px; text-align: left;">Nama Siswa</th>
+                <th style="padding: 10px; text-align: center;">Kelas</th>
+                <th style="padding: 10px; text-align: right;">Keterangan</th>
+            </tr>
+        </thead>
+            </tr>
+         </tr>
+            <tr style="border-bottom: 1px solid #eee;">
+                <td style="padding: 10px;">Azareel Obet Kabanga</td>
+                <td style="padding: 10px;">VII.3</td>
+                <td style="padding: 10px; text-align: right; color: #f1c40f; font-weight: bold;">Sakit</td>
+         </tr>
+            <tr style="border-bottom: 1px solid #eee;">
+                <td style="padding: 10px;">Dwi Anggara Tanan</td>
+                <td style="padding: 10px;">VII.3</td>
+                <td style="padding: 10px; text-align: right; color: #f1c40f; font-weight: bold;">Sakit</td>
+         </tr>
+            <tr style="border-bottom: 1px solid #eee;">
+                <td style="padding: 10px;">Mercy Gabriella Bandaso</td>
+                <td style="padding: 10px;">VII.7</td>
+                <td style="padding: 10px; text-align: right; color: #f1c40f; font-weight: bold;">Sakit</td>
+         </tr>
+            <tr style="border-bottom: 1px solid #eee;">
+                <td style="padding: 10px;">Amabel Damara Felisya</td>
+                <td style="padding: 10px;">IX.11</td>
+                <td style="padding: 10px; text-align: right; color: #f1c40f; font-weight: bold;">Sakit</td>
+         </tr>
+            <tr style="border-bottom: 1px solid #eee;">
+                <td style="padding: 10px;">Marvilya Vacesly</td>
+                <td style="padding: 10px;">IX.11</td>
+                <td style="padding: 10px; text-align: right; color: #f1c40f; font-weight: bold;">Sakit</td>
+               <tr style="border-bottom: 1px solid #eee;">
+                <td style="padding: 10px;">Rigel Mikhael Tosuly</td>
+                <td style="padding: 10px;">VII.3</td>
+                <td style="padding: 10px; text-align: right; color: #3498db; font-weight: bold;">Izin</td>
+             <tr style="border-bottom: 1px solid #eee;">
+                <td style="padding: 10px;">Betelgeuse Aurelia Tosuly</td>
+                <td style="padding: 10px;">IX.7</td>
+                <td style="padding: 10px; text-align: right; color: #3498db; font-weight: bold;">Izin</td>
+             <tr style="border-bottom: 1px solid #eee;">
+                <td style="padding: 10px;">Melikha Putri Warankiran</td>
+                <td style="padding: 10px;">IX.7</td>
+                <td style="padding: 10px; text-align: right; color: #3498db; font-weight: bold;">Izin</td>
+            <tr style="border-bottom: 1px solid #eee;">
+                <td style="padding: 10px;">Jesslyn Anchy Maweru Runtu</td>
+                <td style="padding: 10px;">IX.11</td>
+                <td style="padding: 10px; text-align: right; color: #3498db; font-weight: bold;">Izin</td>
+            <tr style="border-bottom: 1px solid #eee;">
+                <td style="padding: 10px;">Angela Maybelline Bandaso</td>
+                <td style="padding: 10px;">VII.3</td>
+                <td style="padding: 10px; text-align: right; color: #e74c3c; font-weight: bold;">Alpha</td>
+            <tr style="border-bottom: 1px solid #eee;">
+                <td style="padding: 10px;">Fandi Nonekeba</td>
+                <td style="padding: 10px;">VII.3</td>
+                <td style="padding: 10px; text-align: right; color: #e74c3c; font-weight: bold;">Alpha</td>
+            <tr style="border-bottom: 1px solid #eee;">
+                <td style="padding: 10px;">Jersy Elaman</td>
+                <td style="padding: 10px;"> VII.7</td>
+                <td style="padding: 10px; text-align: right; color: #e74c3c; font-weight: bold;">Alpha</td>
+            <tr style="border-bottom: 1px solid #eee;">
+                <td style="padding: 10px;">Bari Adinata</td>
+                <td style="padding: 10px;">IX.3</td>
+                <td style="padding: 10px; text-align: right; color: #e74c3c; font-weight: bold;">Alpha</td>
+            <tr style="border-bottom: 1px solid #eee;">
+                <td style="padding: 10px;">Dennys Emannuel Endrow</td>
+                <td style="padding: 10px;">IX.3</td>
+                <td style="padding: 10px; text-align: right; color: #e74c3c; font-weight: bold;">Alpha</td>
+            <tr style="border-bottom: 1px solid #eee;">
+                <td style="padding: 10px;">Geraldus Tanan</td>
+                <td style="padding: 10px;">IX.3</td>
+                <td style="padding: 10px; text-align: right; color: #e74c3c; font-weight: bold;">Alpha</td>
+            <tr style="border-bottom: 1px solid #eee;">
+                <td style="padding: 10px;">Jehovah Nevan Marjess</td>
+                <td style="padding: 10px;">IX.3</td>
+                <td style="padding: 10px; text-align: right; color: #e74c3c; font-weight: bold;">Alpha</td>
+            <tr style="border-bottom: 1px solid #eee;">
+                <td style="padding: 10px;">Shanne Kaylane</td>
+                <td style="padding: 10px;">IX.3</td>
+                <td style="padding: 10px; text-align: right; color: #e74c3c; font-weight: bold;">Alpha</td>
+            <tr style="border-bottom: 1px solid #eee;">
+                <td style="padding: 10px;">Andrew Gwyn Christopher Fattah</td>
+                <td style="padding: 10px;">IX.7</td>
+                <td style="padding: 10px; text-align: right; color: #e74c3c; font-weight: bold;">Alpha</td>
+            <tr style="border-bottom: 1px solid #eee;">
+                <td style="padding: 10px;">Christophe Joachim Sewang</td>
+                <td style="padding: 10px;">IX.7</td>
+                <td style="padding: 10px; text-align: right; color: #e74c3c; font-weight: bold;">Alpha</td>
+            <tr style="border-bottom: 1px solid #eee;">
+                <td style="padding: 10px;">Eduardus Kevin Alvaro Rangga</td>
+                <td style="padding: 10px;">IX.7</td>
+                <td style="padding: 10px; text-align: right; color: #e74c3c; font-weight: bold;">Alpha</td>
+            <tr style="border-bottom: 1px solid #eee;">
+                <td style="padding: 10px;">Friyoga Joni Sulu</td>
+                <td style="padding: 10px;">IX.7</td>
+                <td style="padding: 10px; text-align: right; color: #e74c3c; font-weight: bold;">Alpha</td>
+            <tr style="border-bottom: 1px solid #eee;">
+                <td style="padding: 10px;">Keanu Michael Pondaag</td>
+                <td style="padding: 10px;">IX.7</td>
+                <td style="padding: 10px; text-align: right; color: #e74c3c; font-weight: bold;">Alpha</td>
+            <tr style="border-bottom: 1px solid #eee;">
+                <td style="padding: 10px;">Septian George Tandi Lallo</td>
+                <td style="padding: 10px;">IX.7</td>
+                <td style="padding: 10px; text-align: right; color: #e74c3c; font-weight: bold;">Alpha</td>
+            <tr style="border-bottom: 1px solid #eee;">
+                <td style="padding: 10px;">Brayen Arnoldus Kadang</td>
+                <td style="padding: 10px;">IX.11</td>
+                <td style="padding: 10px; text-align: right; color: #e74c3c; font-weight: bold;">Alpha</td>
+            <tr style="border-bottom: 1px solid #eee;">
+                <td style="padding: 10px;">Gabriel Desthin Kadang</td>
+                <td style="padding: 10px;">IX.11</td>
+                <td style="padding: 10px; text-align: right; color: #e74c3c; font-weight: bold;">Alpha</td>
+            <tr style="border-bottom: 1px solid #eee;">
+                <td style="padding: 10px;">Jerem Lordin Padatu</td>
+                <td style="padding: 10px;">IX.11</td>
+                <td style="padding: 10px; text-align: right; color: #e74c3c; font-weight: bold;">Alpha</td>
+            <tr style="border-bottom: 1px solid #eee;">
+                <td style="padding: 10px;">Jericho Revan Audriel</td>
+                <td style="padding: 10px;">IX.11</td>
+                <td style="padding: 10px; text-align: right; color: #e74c3c; font-weight: bold;">Alpha</td>
+            <tr style="border-bottom: 1px solid #eee;">
+                <td style="padding: 10px;">Paskah Zuriel Sopacua</td>
+                <td style="padding: 10px;">IX.11</td>
+                <td style="padding: 10px; text-align: right; color: #e74c3c; font-weight: bold;">Alpha</td>
+             </tbody>
+    </table>
+   <h3 style="text-align: center; color: #2c3e50; margin-bottom: 20px;">Siswa yang tidak ada pada daftar ini dianggap HADIR</h3>
+   <p style="font-size: 15px; color: #2c3e50; margin-top: 15px; text-align: left;">Rabu, 4 Februari 2026.
+    <table style="width: 100%; border-collapse: collapse;">
+        <thead>
+            <tr style="background-color: #f2f2f2; border-bottom: 2px solid #ddd;">
+                <th style="padding: 10px; text-align: left;">Nama Siswa</th>
+                <th style="padding: 10px; text-align: center;">Kelas</th>
+                <th style="padding: 10px; text-align: right;">Keterangan</th>
+            </tr>
+        </thead>
+          </tr>
+               </tr>
+            <tr style="border-bottom: 1px solid #eee;">
+                <td style="padding: 10px;">Imelda Meilepin</td>
+                <td style="padding: 10px;">VIII.7</td>
+                <td style="padding: 10px; text-align: right; color: #3498db; font-weight: bold;">Izin</td>
+               </tr>
+            <tr style="border-bottom: 1px solid #eee;">
+                <td style="padding: 10px;">Geraldus Tanan</td>
+                <td style="padding: 10px;">IX.3</td>
+                <td style="padding: 10px; text-align: right; color: #3498db; font-weight: bold;">Izin</td>
+               </tr>
+            <tr style="border-bottom: 1px solid #eee;">
+                <td style="padding: 10px;">Shanne Kaylane</td>
+                <td style="padding: 10px;">IX.3</td>
+                <td style="padding: 10px; text-align: right; color: #3498db; font-weight: bold;">Izin</td>
+            <tr style="border-bottom: 1px solid #eee;">
+                <td style="padding: 10px;">Christie Angelique Titaheluw</td>
+                <td style="padding: 10px;">VIII.7</td>
+                <td style="padding: 10px; text-align: right; color: #e74c3c; font-weight: bold;">Alpha</td>
+            <tr style="border-bottom: 1px solid #eee;">
+                <td style="padding: 10px;">Dirga Putragusti</td>
+                <td style="padding: 10px;">VIII.7</td>
+                <td style="padding: 10px; text-align: right; color: #e74c3c; font-weight: bold;">Alpha</td>
+            <tr style="border-bottom: 1px solid #eee;">
+                <td style="padding: 10px;">Marcella Anastasya Sandur</td>
+                <td style="padding: 10px;">VIII.11</td>
+                <td style="padding: 10px; text-align: right; color: #e74c3c; font-weight: bold;">Alpha</td>
+            <tr style="border-bottom: 1px solid #eee;">
+                <td style="padding: 10px;">Nadal Luxindo Sopa Cua</td>
+                <td style="padding: 10px;">VIII.11</td>
+                <td style="padding: 10px; text-align: right; color: #e74c3c; font-weight: bold;">Alpha</td>
+            <tr style="border-bottom: 1px solid #eee;">
+                <td style="padding: 10px;">Bari Adinata</td>
+                <td style="padding: 10px;">IX.3</td>
+                <td style="padding: 10px; text-align: right; color: #e74c3c; font-weight: bold;">Alpha</td>
+            <tr style="border-bottom: 1px solid #eee;">
+                <td style="padding: 10px;">Nayla Putri Keyza</td>
+                <td style="padding: 10px;">IX.3</td>
+                <td style="padding: 10px; text-align: right; color: #e74c3c; font-weight: bold;">Alpha</td>
+            <tr style="border-bottom: 1px solid #eee;">
+                <td style="padding: 10px;">Sean Gilles Hogendorp</td>
+                <td style="padding: 10px;">IX.7</td>
+                <td style="padding: 10px; text-align: right; color: #e74c3c; font-weight: bold;">Alpha</td>
+            </tbody>
+    </table>
+   <h3 style="text-align: center; color: #2c3e50; margin-bottom: 20px;">Siswa yang tidak ada pada daftar ini dianggap HADIR</h3>
+          <p style="font-size: 15px; color: #2c3e50; margin-top: 15px; text-align: left;">Selasa, 3 Februari 2026.
+    <table style="width: 100%; border-collapse: collapse;">
+        <thead>
+            <tr style="background-color: #f2f2f2; border-bottom: 2px solid #ddd;">
+                <th style="padding: 10px; text-align: left;">Nama Siswa</th>
+                <th style="padding: 10px; text-align: center;">Kelas</th>
+                <th style="padding: 10px; text-align: right;">Keterangan</th>
+            </tr>
+        </thead>
+          </tr>
+       </tr>
+            <tr style="border-bottom: 1px solid #eee;">
+                <td style="padding: 10px;">Dwi Anggara Tanan</td>
+                <td style="padding: 10px;">VII.3</td>
+                <td style="padding: 10px; text-align: right; color: #f1c40f; font-weight: bold;">Sakit</td>
+       </tr>
+            <tr style="border-bottom: 1px solid #eee;">
+                <td style="padding: 10px;">Kenzie Marien Priambada</td>
+                <td style="padding: 10px;">VII.7</td>
+                <td style="padding: 10px; text-align: right; color: #f1c40f; font-weight: bold;">Sakit</td>
+       </tr>
+            <tr style="border-bottom: 1px solid #eee;">
+                <td style="padding: 10px;">Beatrice Aprilliani Theona Brant</td>
+                <td style="padding: 10px;">VIII.3</td>
+                <td style="padding: 10px; text-align: right; color: #f1c40f; font-weight: bold;">Sakit</td>
+       </tr>
+            <tr style="border-bottom: 1px solid #eee;">
+                <td style="padding: 10px;">Destri Todi Payung</td>
+                <td style="padding: 10px;">VIII.3</td>
+                <td style="padding: 10px; text-align: right; color: #f1c40f; font-weight: bold;">Sakit</td>
+       </tr>
+            <tr style="border-bottom: 1px solid #eee;">
+                <td style="padding: 10px;">Emmanuel Chandra Soisarah</td>
+                <td style="padding: 10px;">VIII.3</td>
+                <td style="padding: 10px; text-align: right; color: #f1c40f; font-weight: bold;">Sakit</td>
+       </tr>
+            <tr style="border-bottom: 1px solid #eee;">
+                <td style="padding: 10px;">Viktorya Geno Vevat</td>
+                <td style="padding: 10px;">VIII.3</td>
+                <td style="padding: 10px; text-align: right; color: #f1c40f; font-weight: bold;">Sakit</td>
+             <tr style="border-bottom: 1px solid #eee;">
+                <td style="padding: 10px;">Jersy Elaman</td>
+                <td style="padding: 10px;">VII.7</td>
+                <td style="padding: 10px; text-align: right; color: #e74c3c; font-weight: bold;">Alpha</td>
+             <tr style="border-bottom: 1px solid #eee;">
+                <td style="padding: 10px;">Firmantio Enaba</td>
+                <td style="padding: 10px;">VIII.3</td>
+                <td style="padding: 10px; text-align: right; color: #e74c3c; font-weight: bold;">Alpha</td>
+            </tbody>
+    </table>
+   <h3 style="text-align: center; color: #2c3e50; margin-bottom: 20px;">Siswa yang tidak ada pada daftar ini dianggap HADIR</h3>
+        <p style="font-size: 15px; color: #2c3e50; margin-top: 15px; text-align: left;">Selasa, 27 Januari 2026.
+    <table style="width: 100%; border-collapse: collapse;">
+        <thead>
+            <tr style="background-color: #f2f2f2; border-bottom: 2px solid #ddd;">
+                <th style="padding: 10px; text-align: left;">Nama Siswa</th>
+                <th style="padding: 10px; text-align: center;">Kelas</th>
+                <th style="padding: 10px; text-align: right;">Keterangan</th>
+            </tr>
+        </thead>
+          </tr>
+         </tr>
+            <tr style="border-bottom: 1px solid #eee;">
+                <td style="padding: 10px;">Dwi Anggara Tanan</td>
+                <td style="padding: 10px;">VII.3</td>
+                <td style="padding: 10px; text-align: right; color: #f1c40f; font-weight: bold;">Sakit</td>
+         </tr>
+            <tr style="border-bottom: 1px solid #eee;">
+                <td style="padding: 10px;">Gabriella Christiani Cataleya</td>
+                <td style="padding: 10px;">VIII.11</td>
+                <td style="padding: 10px; text-align: right; color: #f1c40f; font-weight: bold;">Sakit</td>
+               </tr>
+            <tr style="border-bottom: 1px solid #eee;">
+                <td style="padding: 10px;">Angel Sofia Sarang Manik</td>
+                <td style="padding: 10px;">VII.11</td>
+                <td style="padding: 10px; text-align: right; color: #3498db; font-weight: bold;">Izin</td>
+               </tr>
+            <tr style="border-bottom: 1px solid #eee;">
+                <td style="padding: 10px;">Sherly Lovely Alexander</td>
+                <td style="padding: 10px;">VIII.3</td>
+                <td style="padding: 10px; text-align: right; color: #3498db; font-weight: bold;">Izin</td>
+               </tr>
+            <tr style="border-bottom: 1px solid #eee;">
+                <td style="padding: 10px;">Kheinetha Amanda</td>
+                <td style="padding: 10px;">VIII.11</td>
+                <td style="padding: 10px; text-align: right; color: #3498db; font-weight: bold;">Izin</td>
+            <tr style="border-bottom: 1px solid #eee;">
+                <td style="padding: 10px;">Angela Maybelline Bandaso</td>
+                <td style="padding: 10px;">VII.3</td>
+                <td style="padding: 10px; text-align: right; color: #e74c3c; font-weight: bold;">Alpha</td>
+          </tr>
+            <tr style="border-bottom: 1px solid #eee;">
+                <td style="padding: 10px;">Marsya Naulli Oppusunggu</td>
+                <td style="padding: 10px;">VII.3</td>
+                <td style="padding: 10px; text-align: right; color: #e74c3c; font-weight: bold;">Alpha</td>
+          </tr>
+            <tr style="border-bottom: 1px solid #eee;">
+                <td style="padding: 10px;">Jersy Elaman</td>
+                <td style="padding: 10px;">VII.7</td>
+                <td style="padding: 10px; text-align: right; color: #e74c3c; font-weight: bold;">Alpha</td>
+          </tr>
+            <tr style="border-bottom: 1px solid #eee;">
+                <td style="padding: 10px;">Jisel Asdwy Tiranda</td>
+                <td style="padding: 10px;">VII.11</td>
+                <td style="padding: 10px; text-align: right; color: #e74c3c; font-weight: bold;">Alpha</td>
+          </tr>
+            <tr style="border-bottom: 1px solid #eee;">
+                <td style="padding: 10px;">Beatrice Aprilliani Theona Brant</td>
+                <td style="padding: 10px;">VIII.3</td>
+                <td style="padding: 10px; text-align: right; color: #e74c3c; font-weight: bold;">Alpha</td>
+          </tr>
+            <tr style="border-bottom: 1px solid #eee;">
+                <td style="padding: 10px;">Bennedict Arthur Patandean</td>
+                <td style="padding: 10px;">VIII.3</td>
+                <td style="padding: 10px; text-align: right; color: #e74c3c; font-weight: bold;">Alpha</td>
+          </tr>
+            <tr style="border-bottom: 1px solid #eee;">
+                <td style="padding: 10px;">Firmantio Enaba</td>
+                <td style="padding: 10px;">VIII.3</td>
+                <td style="padding: 10px; text-align: right; color: #e74c3c; font-weight: bold;">Alpha</td>
+          </tr>
+            <tr style="border-bottom: 1px solid #eee;">
+                <td style="padding: 10px;">Viktorya Geno Vevat</td>
+                <td style="padding: 10px;">VIII.3</td>
+                <td style="padding: 10px; text-align: right; color: #e74c3c; font-weight: bold;">Alpha</td>
+          </tr>
+            <tr style="border-bottom: 1px solid #eee;">
+                <td style="padding: 10px;">Nadal Luxindo Sopa Cua</td>
+                <td style="padding: 10px;">VIII.11</td>
+                <td style="padding: 10px; text-align: right; color: #e74c3c; font-weight: bold;">Alpha</td>
+            </tbody>
+    </table>
+   <h3 style="text-align: center; color: #2c3e50; margin-bottom: 20px;">Siswa yang tidak ada pada daftar ini dianggap HADIR</h3>
+        <p style="font-size: 15px; color: #2c3e50; margin-top: 15px; text-align: left;">Rabu, 21 Januari 2026.
+    <table style="width: 100%; border-collapse: collapse;">
+        <thead>
+            <tr style="background-color: #f2f2f2; border-bottom: 2px solid #ddd;">
+                <th style="padding: 10px; text-align: left;">Nama Siswa</th>
+                <th style="padding: 10px; text-align: center;">Kelas</th>
+                <th style="padding: 10px; text-align: right;">Keterangan</th>
+            </tr>
+        </thead>
+         </tr>
+            <tr style="border-bottom: 1px solid #eee;">
+                <td style="padding: 10px;">Jacqualine Mychel Noya</td>
+                <td style="padding: 10px;">VIII.3</td>
+                <td style="padding: 10px; text-align: right; color: #f1c40f; font-weight: bold;">Sakit</td>
+              </tr>
+            <tr style="border-bottom: 1px solid #eee;">
+                <td style="padding: 10px;">Valerie Jocelyn</td>
+                <td style="padding: 10px;">IX.7</td>
+                <td style="padding: 10px; text-align: right; color: #f1c40f; font-weight: bold;">Sakit</td>
+              </tr>
+            <tr style="border-bottom: 1px solid #eee;">
+                <td style="padding: 10px;">Clara Clarissa Adriany</td>
+                <td style="padding: 10px;">IX.11</td>
+                <td style="padding: 10px; text-align: right; color: #f1c40f; font-weight: bold;">Sakit</td>
+          </tr>
+            <tr style="border-bottom: 1px solid #eee;">
+                <td style="padding: 10px;">Bari Adinata</td>
+                <td style="padding: 10px;">IX.3</td>
+                <td style="padding: 10px; text-align: right; color: #e74c3c; font-weight: bold;">Alpha</td>
+          </tr>
+            <tr style="border-bottom: 1px solid #eee;">
+                <td style="padding: 10px;">Dennys Imanuel Endrow</td>
+                <td style="padding: 10px;">IX.3</td>
+                <td style="padding: 10px; text-align: right; color: #e74c3c; font-weight: bold;">Alpha</td>
+          </tr>
+            <tr style="border-bottom: 1px solid #eee;">
+                <td style="padding: 10px;">Nayla Putri Keyza</td>
+                <td style="padding: 10px;">IX.3</td>
+                <td style="padding: 10px; text-align: right; color: #e74c3c; font-weight: bold;">Alpha</td>
+          </tr>
+            <tr style="border-bottom: 1px solid #eee;">
+                <td style="padding: 10px;">Gilbert Christopher Pasau</td>
+                <td style="padding: 10px;">IX.11</td>
+                <td style="padding: 10px; text-align: right; color: #e74c3c; font-weight: bold;">Alpha</td>
+          </tr>
+            <tr style="border-bottom: 1px solid #eee;">
+                <td style="padding: 10px;">Jericho Revan Audriel</td>
+                <td style="padding: 10px;">IX.11</td>
+                <td style="padding: 10px; text-align: right; color: #e74c3c; font-weight: bold;">Alpha</td>
+             </tr>
+            </tbody>
+    </table>
+   <h3 style="text-align: center; color: #2c3e50; margin-bottom: 20px;">Siswa yang tidak ada pada daftar ini dianggap HADIR</h3>
+        <p style="font-size: 15px; color: #2c3e50; margin-top: 15px; text-align: left;">Selasa, 20 Januari 2026.
+    <table style="width: 100%; border-collapse: collapse;">
+        <thead>
+            <tr style="background-color: #f2f2f2; border-bottom: 2px solid #ddd;">
+                <th style="padding: 10px; text-align: left;">Nama Siswa</th>
+                <th style="padding: 10px; text-align: center;">Kelas</th>
+                <th style="padding: 10px; text-align: right;">Keterangan</th>
+            </tr>
+        </thead>
+              </tr>
+            <tr style="border-bottom: 1px solid #eee;">
+                <td style="padding: 10px;">Dwi Anggara Tanan</td>
+                <td style="padding: 10px;">VII.3</td>
+                <td style="padding: 10px; text-align: right; color: #f1c40f; font-weight: bold;">Sakit</td>
+             </tr>
+            <tr style="border-bottom: 1px solid #eee;">
+                <td style="padding: 10px;">Salfa Gina Sahira</td>
+                <td style="padding: 10px;">VIII.7</td>
+                <td style="padding: 10px; text-align: right; color: #f1c40f; font-weight: bold;">Sakit</td>
+               </tr>
+            <tr style="border-bottom: 1px solid #eee;">
+                <td style="padding: 10px;">Willy Obeth Rante</td>
+                <td style="padding: 10px;">VII.11</td>
+                <td style="padding: 10px; text-align: right; color: #3498db; font-weight: bold;">Izin</td>
+               </tr>
+            <tr style="border-bottom: 1px solid #eee;">
+                <td style="padding: 10px;">Imelda Meilepin</td>
+                <td style="padding: 10px;">VIII.7</td>
+                <td style="padding: 10px; text-align: right; color: #3498db; font-weight: bold;">Izin</td>
+               </tr>
+            <tr style="border-bottom: 1px solid #eee;">
+                <td style="padding: 10px;">Jesua Dominggus Parera JR</td>
+                <td style="padding: 10px;">VIII.7</td>
+                <td style="padding: 10px; text-align: right; color: #3498db; font-weight: bold;">Izin</td>
+          </tr>
+            <tr style="border-bottom: 1px solid #eee;">
+                <td style="padding: 10px;">Angela Maybelline Bandaso</td>
+                <td style="padding: 10px;">VII.3</td>
+                <td style="padding: 10px; text-align: right; color: #e74c3c; font-weight: bold;">Alpha</td>
+          </tr>
+            <tr style="border-bottom: 1px solid #eee;">
+                <td style="padding: 10px;">Azareel Obet Kabanga</td>
+                <td style="padding: 10px;">VII.3</td>
+                <td style="padding: 10px; text-align: right; color: #e74c3c; font-weight: bold;">Alpha</td>
+          </tr>
+            <tr style="border-bottom: 1px solid #eee;">
+                <td style="padding: 10px;">Jois Natalia Henderika</td>
+                <td style="padding: 10px;">VII.3</td>
+                <td style="padding: 10px; text-align: right; color: #e74c3c; font-weight: bold;">Alpha</td>
+          </tr>
+            <tr style="border-bottom: 1px solid #eee;">
+                <td style="padding: 10px;">Marsya Naulli Oppusunggu</td>
+                <td style="padding: 10px;">VII.3</td>
+                <td style="padding: 10px; text-align: right; color: #e74c3c; font-weight: bold;">Alpha</td>
+          </tr>
+            <tr style="border-bottom: 1px solid #eee;">
+                <td style="padding: 10px;">Jersy Elaman</td>
+                <td style="padding: 10px;">VII.7</td>
+                <td style="padding: 10px; text-align: right; color: #e74c3c; font-weight: bold;">Alpha</td>
+          </tr>
+            <tr style="border-bottom: 1px solid #eee;">
+                <td style="padding: 10px;">Mercy Gabriella Bandaso</td>
+                <td style="padding: 10px;">VII.7</td>
+                <td style="padding: 10px; text-align: right; color: #e74c3c; font-weight: bold;">Alpha</td>
+          </tr>
+            <tr style="border-bottom: 1px solid #eee;">
+                <td style="padding: 10px;">Anugrah Timothy Randa Pakan</td>
+                <td style="padding: 10px;">VII.11</td>
+                <td style="padding: 10px; text-align: right; color: #e74c3c; font-weight: bold;">Alpha</td>
+          </tr>
+            <tr style="border-bottom: 1px solid #eee;">
+                <td style="padding: 10px;">Jisel Asdwy Tiranda</td>
+                <td style="padding: 10px;">VII.11</td>
+                <td style="padding: 10px; text-align: right; color: #e74c3c; font-weight: bold;">Alpha</td>
+          </tr>
+            <tr style="border-bottom: 1px solid #eee;">
+                <td style="padding: 10px;">Chalfin Christofel Robo</td>
+                <td style="padding: 10px;">VIII.7</td>
+                <td style="padding: 10px; text-align: right; color: #e74c3c; font-weight: bold;">Alpha</td>
+          </tr>
+            <tr style="border-bottom: 1px solid #eee;">
+                <td style="padding: 10px;">Christie Angelique Titaheluw</td>
+                <td style="padding: 10px;">VIII.7</td>
+                <td style="padding: 10px; text-align: right; color: #e74c3c; font-weight: bold;">Alpha</td>
+          </tr>
+            <tr style="border-bottom: 1px solid #eee;">
+                <td style="padding: 10px;">Alenz Septiyan Tanggo</td>
+                <td style="padding: 10px;">VIII.11</td>
+                <td style="padding: 10px; text-align: right; color: #e74c3c; font-weight: bold;">Alpha</td>
+          </tr>
+            <tr style="border-bottom: 1px solid #eee;">
+                <td style="padding: 10px;">Nadal Luxindo Sopa Cua</td>
+                <td style="padding: 10px;">VIII.11</td>
+                <td style="padding: 10px; text-align: right; color: #e74c3c; font-weight: bold;">Alpha</td>
+             </tr>
+            </tbody>
+    </table>
+   <h3 style="text-align: center; color: #2c3e50; margin-bottom: 20px;">Siswa yang tidak ada pada daftar ini dianggap HADIR</h3>
+        <p style="font-size: 15px; color: #2c3e50; margin-top: 15px; text-align: left;">Rabu, 14 Januari 2026.
+    <table style="width: 100%; border-collapse: collapse;">
+        <thead>
+            <tr style="background-color: #f2f2f2; border-bottom: 2px solid #ddd;">
+                <th style="padding: 10px; text-align: left;">Nama Siswa</th>
+                <th style="padding: 10px; text-align: center;">Kelas</th>
+                <th style="padding: 10px; text-align: right;">Keterangan</th>
+            </tr>
+        </thead>
+        <tbody>
+            </tr>
+            <tr style="border-bottom: 1px solid #eee;">
+                <td style="padding: 10px;">Jacqueline Mychel Noya</td>
+                <td style="padding: 10px;">VIII.3</td>
+                <td style="padding: 10px; text-align: right; color: #f1c40f; font-weight: bold;">Sakit</td>
+         </tr>
+            <tr style="border-bottom: 1px solid #eee;">
+                <td style="padding: 10px;">Christie Angelique Titaheluw</td>
+                <td style="padding: 10px;">VIII.7</td>
+                <td style="padding: 10px; text-align: right; color: #f1c40f; font-weight: bold;">Sakit</td>
+              </tr>
+            <tr style="border-bottom: 1px solid #eee;">
+                <td style="padding: 10px;">Jesua Dominggus Parera JR</td>
+                <td style="padding: 10px;">VIII.7</td>
+                <td style="padding: 10px; text-align: right; color: #f1c40f; font-weight: bold;">Sakit</td>
+             </tr>
+            <tr style="border-bottom: 1px solid #eee;">
+                <td style="padding: 10px;">Alenz Septiyan Tanggo</td>
+                <td style="padding: 10px;">VIII.11</td>
+                <td style="padding: 10px; text-align: right; color: #f1c40f; font-weight: bold;">Sakit</td>
+             </tr>
+            <tr style="border-bottom: 1px solid #eee;">
+                <td style="padding: 10px;">Andi Melody Emmanuela</td>
+                <td style="padding: 10px;">VIII.11</td>
+                <td style="padding: 10px; text-align: right; color: #f1c40f; font-weight: bold;">Sakit</td>
+            </tr>
+            <tr style="border-bottom: 1px solid #eee;">
+                <td style="padding: 10px;">Kheinetha Amanda</td>
+                <td style="padding: 10px;">VIII.11</td>
+                <td style="padding: 10px; text-align: right; color: #f1c40f; font-weight: bold;">Sakit</td>
+              </tr>
+            <tr style="border-bottom: 1px solid #eee;">
+                <td style="padding: 10px;">Agatha Aleandra Tamba</td>
+                <td style="padding: 10px;">VIII.7</td>
+                <td style="padding: 10px; text-align: right; color: #3498db; font-weight: bold;">Izin</td>
+              </tr>
+            <tr style="border-bottom: 1px solid #eee;">
+                <td style="padding: 10px;">Jovan Fidy Leonard Siegers</td>
+                <td style="padding: 10px;">VIII.11</td>
+                <td style="padding: 10px; text-align: right; color: #3498db; font-weight: bold;">Izin</td>
+             </tr>
+            <tr style="border-bottom: 1px solid #eee;">
+                <td style="padding: 10px;">Marcella Anastasya Sandur</td>
+                <td style="padding: 10px;">VIII.11</td>
+                <td style="padding: 10px; text-align: right; color: #3498db; font-weight: bold;">Izin</td>
+          </tr>
+            <tr style="border-bottom: 1px solid #eee;">
+                <td style="padding: 10px;">Beatrice Aprilliani Theona Brant</td>
+                <td style="padding: 10px;">VIII.3</td>
+                <td style="padding: 10px; text-align: right; color: #e74c3c; font-weight: bold;">Alpha</td>
+          </tr>
+            <tr style="border-bottom: 1px solid #eee;">
+                <td style="padding: 10px;">Nadal Luxindo Sopa Cua</td>
+                <td style="padding: 10px;">VIII.11</td>
+                <td style="padding: 10px; text-align: right; color: #e74c3c; font-weight: bold;">Alpha</td>
+            </tr>
+            </tbody>
+    </table>
+   <h3 style="text-align: center; color: #2c3e50; margin-bottom: 20px;">Siswa yang tidak ada pada daftar ini dianggap HADIR</h3>
+        <p style="font-size: 15px; color: #2c3e50; margin-top: 15px; text-align: left;">Selasa, 13 Januari 2026.
+    <table style="width: 100%; border-collapse: collapse;">
+        <thead>
+            <tr style="background-color: #f2f2f2; border-bottom: 2px solid #ddd;">
+                <th style="padding: 10px; text-align: left;">Nama Siswa</th>
+                <th style="padding: 10px; text-align: center;">Kelas</th>
+                <th style="padding: 10px; text-align: right;">Keterangan</th>
+            </tr>
+        </thead>
+        <tbody>
+         </tr>
+           </tr>
+            <tr style="border-bottom: 1px solid #eee;">
+                <td style="padding: 10px;">Dwi Anggara Tanan</td>
+                <td style="padding: 10px;">VII.3</td>
+                <td style="padding: 10px; text-align: right; color: #f1c40f; font-weight: bold;">Sakit</td>
+            </tr>
+            <tr style="border-bottom: 1px solid #eee;">
+                <td style="padding: 10px;">Johnathan Fabian Johnson</td>
+                <td style="padding: 10px;">VII.7</td>
+                <td style="padding: 10px; text-align: right; color: #f1c40f; font-weight: bold;">Sakit</td>
+            </tr>
+            <tr style="border-bottom: 1px solid #eee;">
+                <td style="padding: 10px;">Amabel Damara Felisya</td>
+                <td style="padding: 10px;">IX.11</td>
+                <td style="padding: 10px; text-align: right; color: #f1c40f; font-weight: bold;">Sakit</td>
+             </tr>
+            <tr style="border-bottom: 1px solid #eee;">
+                <td style="padding: 10px;">Dea Patricia Langi'</td>
+                <td style="padding: 10px;">VII.3</td>
+                <td style="padding: 10px; text-align: right; color: #3498db; font-weight: bold;">Izin</td>
+             </tr>
+            <tr style="border-bottom: 1px solid #eee;">
+                <td style="padding: 10px;">Angela Maybelline Bandaso</td>
+                <td style="padding: 10px;">VII.3</td>
+                <td style="padding: 10px; text-align: right; color: #e74c3c; font-weight: bold;">Alpha</td>
+             </tr>
+            <tr style="border-bottom: 1px solid #eee;">
+                <td style="padding: 10px;">Jersy Elaman</td>
+                <td style="padding: 10px;">VII.7</td>
+                <td style="padding: 10px; text-align: right; color: #e74c3c; font-weight: bold;">Alpha</td>
+             </tr>
+            <tr style="border-bottom: 1px solid #eee;">
+                <td style="padding: 10px;">Mercy Gabriella Bandaso</td>
+                <td style="padding: 10px;">VII.7</td>
+                <td style="padding: 10px; text-align: right; color: #e74c3c; font-weight: bold;">Alpha</td>
+             </tr>
+            <tr style="border-bottom: 1px solid #eee;">
+                <td style="padding: 10px;">Jisel Asdwy Tiranda</td>
+                <td style="padding: 10px;">VII.11</td>
+                <td style="padding: 10px; text-align: right; color: #e74c3c; font-weight: bold;">Alpha</td>
+             </tr>
+            <tr style="border-bottom: 1px solid #eee;">
+                <td style="padding: 10px;">Bari Adinata</td>
+                <td style="padding: 10px;">IX.3</td>
+                <td style="padding: 10px; text-align: right; color: #e74c3c; font-weight: bold;">Alpha</td>
+             </tr>
+            <tr style="border-bottom: 1px solid #eee;">
+                <td style="padding: 10px;">Dennys Imannuel Endrow</td>
+                <td style="padding: 10px;">IX.3</td>
+                <td style="padding: 10px; text-align: right; color: #e74c3c; font-weight: bold;">Alpha</td>
+             </tr>
+            <tr style="border-bottom: 1px solid #eee;">
+                <td style="padding: 10px;">Geraldus Tanan</td>
+                <td style="padding: 10px;">IX.3</td>
+                <td style="padding: 10px; text-align: right; color: #e74c3c; font-weight: bold;">Alpha</td>
+             </tr>
+            <tr style="border-bottom: 1px solid #eee;">
+                <td style="padding: 10px;">Jehovah Nevan Marjess</td>
+                <td style="padding: 10px;">IX.3</td>
+                <td style="padding: 10px; text-align: right; color: #e74c3c; font-weight: bold;">Alpha</td>
+             </tr>
+            <tr style="border-bottom: 1px solid #eee;">
+                <td style="padding: 10px;">Nayla Putri Keyza</td>
+                <td style="padding: 10px;">IX.3</td>
+                <td style="padding: 10px; text-align: right; color: #e74c3c; font-weight: bold;">Alpha</td>
+             </tr>
+            <tr style="border-bottom: 1px solid #eee;">
+                <td style="padding: 10px;">Shanne Kaylane</td>
+                <td style="padding: 10px;">IX.3</td>
+                <td style="padding: 10px; text-align: right; color: #e74c3c; font-weight: bold;">Alpha</td>
+             </tr>
+            <tr style="border-bottom: 1px solid #eee;">
+                <td style="padding: 10px;">Betelgeuse Aurelia Tosuly</td>
+                <td style="padding: 10px;">IX.7</td>
+                <td style="padding: 10px; text-align: right; color: #e74c3c; font-weight: bold;">Alpha</td>
+             </tr>
+            <tr style="border-bottom: 1px solid #eee;">
+                <td style="padding: 10px;">Eduardus Kevin Alvaro Rangga</td>
+                <td style="padding: 10px;">IX.7</td>
+                <td style="padding: 10px; text-align: right; color: #e74c3c; font-weight: bold;">Alpha</td>
+             </tr>
+            <tr style="border-bottom: 1px solid #eee;">
+                <td style="padding: 10px;">Laiqa Desiree Eleonora Madjid</td>
+                <td style="padding: 10px;">IX.7</td>
+                <td style="padding: 10px; text-align: right; color: #e74c3c; font-weight: bold;">Alpha</td>
+             </tr>
+            <tr style="border-bottom: 1px solid #eee;">
+                <td style="padding: 10px;">Septian George Tandi Lallo</td>
+                <td style="padding: 10px;">IX.7</td>
+                <td style="padding: 10px; text-align: right; color: #e74c3c; font-weight: bold;">Alpha</td>
+             </tr>
+            <tr style="border-bottom: 1px solid #eee;">
+                <td style="padding: 10px;">Valerie Jocelyn</td>
+                <td style="padding: 10px;">IX.7</td>
+                <td style="padding: 10px; text-align: right; color: #e74c3c; font-weight: bold;">Alpha</td>
+             </tr>
+            <tr style="border-bottom: 1px solid #eee;">
+                <td style="padding: 10px;">Brayen Arnoldus Lembang</td>
+                <td style="padding: 10px;">IX.11</td>
+                <td style="padding: 10px; text-align: right; color: #e74c3c; font-weight: bold;">Alpha</td>
+             </tr>
+            <tr style="border-bottom: 1px solid #eee;">
+                <td style="padding: 10px;">Gabriel Hosana Tamin</td>
+                <td style="padding: 10px;">IX.11</td>
+                <td style="padding: 10px; text-align: right; color: #e74c3c; font-weight: bold;">Alpha</td>
+             </tr>
+            <tr style="border-bottom: 1px solid #eee;">
+                <td style="padding: 10px;">Gilbert Christopher Pasau</td>
+                <td style="padding: 10px;">IX.11</td>
+                <td style="padding: 10px; text-align: right; color: #e74c3c; font-weight: bold;">Alpha</td>
+             </tr>
+            <tr style="border-bottom: 1px solid #eee;">
+                <td style="padding: 10px;">Paskah Zuriel Sopa Cua</td>
+                <td style="padding: 10px;">IX.11</td>
+                <td style="padding: 10px; text-align: right; color: #e74c3c; font-weight: bold;">Alpha</td>
+            </tr>
+            </tbody>
+    </table>
+   <h3 style="text-align: center; color: #2c3e50; margin-bottom: 20px;">Siswa yang tidak ada pada daftar ini dianggap HADIR</h3>
+    </p>
+</div>
+
+</script>
+    <div style="background-color: white; padding: 1px; border-radius: 10px; margin-top: 25px; box-shadow: 0 4px 6px rgba(0,0,0,0.1);">
+       <h3 style="text-align: center; color: #2c3e50; margin-bottom: 20px;">Absen</h3>
+    <table style="width: 100%; border-collapse: collapse;">
+        <thead>
+            <tr style="background-color: #f2f2f2; border-bottom: 1px solid #ddd;">
+                <th style="padding: 10px; text-align: left;">Nama Siswa</th>
+                <th style="padding: 10px; text-align: center;">Kelas</th>
+                <th style="padding: 10px; text-align: right; color: #2ecc71; font-weight: bold;">Hadir</th>
+                <th style="padding: 10px; text-align: right; color: #f1c40f; font-weight: bold;">Sakit</th>
+                <th style="padding: 10px; text-align: right; color: #3498db; font-weight: bold;">Izin</th>
+                <th style="padding: 10px; text-align: right; color: #e74c3c; font-weight: bold;">ALPHA</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr style="border-bottom: 1px solid #eee;">
+                <td style="padding: 10px;">Angela Maybelline Bandaso</td>
+                <td style="padding: 10px;">VII.3</td>
+                <td style="padding: 10px; text-align: center;">1</td>
+                <td style="padding: 10px; text-align: center;">0</td>
+                <td style="padding: 10px; text-align: center;">0</td>
+                <td style="padding: 10px; text-align: center; font-weight:  bold; ">4</td>
+            </tr>
+        </thead>
+        <tbody>
+            <tr style="border-bottom: 1px solid #eee;">
+                <td style="padding: 10px;">Azareel Obet Kabanga</td>
+                <td style="padding: 10px;">VII.3</td>
+                <td style="padding: 10px; text-align: center;">3</td>
+                <td style="padding: 10px; text-align: center;">1</td>
+                <td style="padding: 10px; text-align: center;">0</td>
+                <td style="padding: 10px; text-align: center; font-weight:  bold; ">1</td>
+            </tr>
+        </thead>
+        <tbody>
+            <tr style="border-bottom: 1px solid #eee;">
+                <td style="padding: 10px;">Dea Patricia Langi'</td>
+                <td style="padding: 10px;">VII.3</td>
+                <td style="padding: 10px; text-align: center;">4</td>
+                <td style="padding: 10px; text-align: center;">0</td>
+                <td style="padding: 10px; text-align: center;">1</td>
+                <td style="padding: 10px; text-align: center; font-weight:  bold; ">0</td>
+             </tr>
+        </thead>
+        <tbody>
+            <tr style="border-bottom: 1px solid #eee;">
+                <td style="padding: 10px;">Dwi Anggara Tanan</td>
+                <td style="padding: 10px;">VII.3</td>
+                <td style="padding: 10px; text-align: center;">0</td>
+                <td style="padding: 10px; text-align: center;">5</td>
+                <td style="padding: 10px; text-align: center;">0</td>
+                <td style="padding: 10px; text-align: center; font-weight:  bold; ">0</td>
+            </tr>
+        </thead>
+        <tbody>
+            <tr style="border-bottom: 1px solid #eee;">
+                <td style="padding: 10px;">Fandi Nonekeba</td>
+                <td style="padding: 10px;">VII.3</td>
+                <td style="padding: 10px; text-align: center;">4</td>
+                <td style="padding: 10px; text-align: center;">0</td>
+                <td style="padding: 10px; text-align: center;">0</td>
+                <td style="padding: 10px; text-align: center; font-weight:  bold; ">1</td>
+            </tr>
+        </thead>
+        <tbody>
+            <tr style="border-bottom: 1px solid #eee;">
+                <td style="padding: 10px;">Giovanno Avrillio Mattheo Passasa</td>
+                <td style="padding: 10px;">VII.3</td>
+                <td style="padding: 10px; text-align: center;">5</td>
+                <td style="padding: 10px; text-align: center;">0</td>
+                <td style="padding: 10px; text-align: center;">0</td>
+                <td style="padding: 10px; text-align: center; font-weight:  bold; ">0</td>
+            </tr>
+        </thead>
+        <tbody>
+            <tr style="border-bottom: 1px solid #eee;">
+                <td style="padding: 10px;">Jois Natalia Henderika</td>
+                <td style="padding: 10px;">VII.3</td>
+                <td style="padding: 10px; text-align: center;">4</td>
+                <td style="padding: 10px; text-align: center;">0</td>
+                <td style="padding: 10px; text-align: center;">0</td>
+                <td style="padding: 10px; text-align: center; font-weight:  bold; ">1</td>
+            </tr>
+        </thead>
+        <tbody>
+            <tr style="border-bottom: 1px solid #eee;">
+                <td style="padding: 10px;">Marsya Naulli Oppusunggu</td>
+                <td style="padding: 10px;">VII.3</td>
+                <td style="padding: 10px; text-align: center;">3</td>
+                <td style="padding: 10px; text-align: center;">0</td>
+                <td style="padding: 10px; text-align: center;">0</td>
+                <td style="padding: 10px; text-align: center; font-weight:  bold; ">2</td>
+            </tr>
+        </thead>
+        <tbody>
+            <tr style="border-bottom: 1px solid #eee;">
+                <td style="padding: 10px;">Rigel Mikhael Tosuly</td>
+                <td style="padding: 10px;">VII.3</td>
+                <td style="padding: 10px; text-align: center;">4</td>
+                <td style="padding: 10px; text-align: center;">0</td>
+                <td style="padding: 10px; text-align: center;">1</td>
+                <td style="padding: 10px; text-align: center; font-weight:  bold; ">0</td>
+            </tr>
+        </thead>
+        <tbody>
+            <tr style="border-bottom: 1px solid #eee;">
+                <td style="padding: 10px;">Sweet Ocean Noach Matulessy JR</td>
+                <td style="padding: 10px;">VII.3</td>
+                <td style="padding: 10px; text-align: center;">5</td>
+                <td style="padding: 10px; text-align: center;">0</td>
+                <td style="padding: 10px; text-align: center;">0</td>
+                <td style="padding: 10px; text-align: center; font-weight:  bold; ">0</td>
+                </tr>
+                </thead>
+                <tbody>
+            <tr style="border-bottom: 1px solid #eee;">
+                <td style="padding: 10px;">Angelica Elzira Aesong</td>
+                <td style="padding: 10px;">VII.7</td>
+                <td style="padding: 10px; text-align: center;">5</td>
+                <td style="padding: 10px; text-align: center;">0</td>
+                <td style="padding: 10px; text-align: center;">0</td>
+                <td style="padding: 10px; text-align: center; font-weight:  bold; ">0</td>
+                </tr>
+                </thead>
+                <tbody>
+            <tr style="border-bottom: 1px solid #eee;">
+                <td style="padding: 10px;">Imanuel Jonry Parinussa</td>
+                <td style="padding: 10px;">VII.7</td>
+                <td style="padding: 10px; text-align: center;">5</td>
+                <td style="padding: 10px; text-align: center;">0</td>
+                <td style="padding: 10px; text-align: center;">0</td>
+                <td style="padding: 10px; text-align: center; font-weight:  bold; ">0</td>
+                </tr>
+                </thead>
+                <tbody>
+            <tr style="border-bottom: 1px solid #eee;">
+                <td style="padding: 10px;">Jersy Elaman</td>
+                <td style="padding: 10px;">VII.7</td>
+                <td style="padding: 10px; text-align: center;">0</td>
+                <td style="padding: 10px; text-align: center;">0</td>
+                <td style="padding: 10px; text-align: center;">0</td>
+                <td style="padding: 10px; text-align: center; font-weight:  bold; ">5</td>
+                </tr>
+                </thead>
+                <tbody>
+            <tr style="border-bottom: 1px solid #eee;">
+                <td style="padding: 10px;">Johnatan Fabian Johnson</td>
+                <td style="padding: 10px;">VII.7</td>
+                <td style="padding: 10px; text-align: center;">4</td>
+                <td style="padding: 10px; text-align: center;">1</td>
+                <td style="padding: 10px; text-align: center;">0</td>
+                <td style="padding: 10px; text-align: center; font-weight:  bold; ">0</td>
+                </tr>
+                </thead>
+                <tbody>
+            <tr style="border-bottom: 1px solid #eee;">
+                <td style="padding: 10px;">Joshua Aurellio Parinussa</td>
+                <td style="padding: 10px;">VII.7</td>
+                <td style="padding: 10px; text-align: center;">5</td>
+                <td style="padding: 10px; text-align: center;">0</td>
+                <td style="padding: 10px; text-align: center;">0</td>
+                <td style="padding: 10px; text-align: center; font-weight:  bold; ">0</td>
+                </tr>
+                </thead>
+                <tbody>
+            <tr style="border-bottom: 1px solid #eee;">
+                <td style="padding: 10px;">Kenzie Marien Priambada</td>
+                <td style="padding: 10px;">VII.7</td>
+                <td style="padding: 10px; text-align: center;">4</td>
+                <td style="padding: 10px; text-align: center;">1</td>
+                <td style="padding: 10px; text-align: center;">0</td>
+                <td style="padding: 10px; text-align: center; font-weight:  bold; ">0</td>
+                </tr>
+                </thead>
+                <tbody>
+            <tr style="border-bottom: 1px solid #eee;">
+                <td style="padding: 10px;">Khanza Dhatu Mandasari</td>
+                <td style="padding: 10px;">VII.7</td>
+                <td style="padding: 10px; text-align: center;">5</td>
+                <td style="padding: 10px; text-align: center;">0</td>
+                <td style="padding: 10px; text-align: center;">0</td>
+                <td style="padding: 10px; text-align: center; font-weight:  bold; ">0</td>
+                </tr>
+                </thead>
+                <tbody>
+            <tr style="border-bottom: 1px solid #eee;">
+                <td style="padding: 10px;">Mercy Gabriella Bandaso</td>
+                <td style="padding: 10px;">VII.7</td>
+                <td style="padding: 10px; text-align: center;">2</td>
+                <td style="padding: 10px; text-align: center;">1</td>
+                <td style="padding: 10px; text-align: center;">0</td>
+                <td style="padding: 10px; text-align: center; font-weight:  bold; ">2</td>
+                </tr>
+                </thead>
+                <tbody>
+            <tr style="border-bottom: 1px solid #eee;">
+                <td style="padding: 10px;">Angel Sofia Sarang Manik</td>
+                <td style="padding: 10px;">VII.11</td>
+                <td style="padding: 10px; text-align: center;">4</td>
+                <td style="padding: 10px; text-align: center;">0</td>
+                <td style="padding: 10px; text-align: center;">1</td>
+                <td style="padding: 10px; text-align: center; font-weight:  bold; ">0</td>
+</tr>
+<tr style="border-bottom: 1px solid #eee;">
+    <td style="padding: 10px;">Anugrah Timothy Randa Pakan</td>
+    <td style="padding: 10px;">VII.11</td>
+    <td style="padding: 10px; text-align: center;">4</td>
+    <td style="padding: 10px; text-align: center;">0</td>
+    <td style="padding: 10px; text-align: center;">0</td>
+    <td style="padding: 10px; text-align: center; font-weight: bold;">1</td>
+</tr>
+<tr style="border-bottom: 1px solid #eee;">
+    <td style="padding: 10px;">Catharine Cheryl Emmanuela</td>
+    <td style="padding: 10px;">VII.11</td>
+    <td style="padding: 10px; text-align: center;">5</td>
+    <td style="padding: 10px; text-align: center;">0</td>
+    <td style="padding: 10px; text-align: center;">0</td>
+    <td style="padding: 10px; text-align: center; font-weight: bold;">0</td>
+</tr>
+<tr style="border-bottom: 1px solid #eee;">
+    <td style="padding: 10px;">Clay Nathanael Korompis</td>
+    <td style="padding: 10px;">VII.11</td>
+    <td style="padding: 10px; text-align: center;">5</td>
+    <td style="padding: 10px; text-align: center;">0</td>
+    <td style="padding: 10px; text-align: center;">0</td>
+    <td style="padding: 10px; text-align: center; font-weight: bold;">0</td>
+</tr>
+<tr style="border-bottom: 1px solid #eee;">
+    <td style="padding: 10px;">Jessica Reynata Augreina</td>
+    <td style="padding: 10px;">VII.11</td>
+    <td style="padding: 10px; text-align: center;">5</td>
+    <td style="padding: 10px; text-align: center;">0</td>
+    <td style="padding: 10px; text-align: center;">0</td>
+    <td style="padding: 10px; text-align: center; font-weight: bold;">0</td>
+</tr>
+<tr style="border-bottom: 1px solid #eee;">
+    <td style="padding: 10px;">Jisel Asdwy Tiranda</td>
+    <td style="padding: 10px;">VII.11</td>
+    <td style="padding: 10px; text-align: center;">2</td>
+    <td style="padding: 10px; text-align: center;">0</td>
+    <td style="padding: 10px; text-align: center;">0</td>
+    <td style="padding: 10px; text-align: center; font-weight: bold;">3</td>
+</tr>
+<tr style="border-bottom: 1px solid #eee;">
+    <td style="padding: 10px;">Michelle Pricillia Sita</td>
+    <td style="padding: 10px;">VII.11</td>
+    <td style="padding: 10px; text-align: center;">5</td>
+    <td style="padding: 10px; text-align: center;">0</td>
+    <td style="padding: 10px; text-align: center;">0</td>
+    <td style="padding: 10px; text-align: center; font-weight: bold;">0</td>
+</tr>
+<tr style="border-bottom: 1px solid #eee;">
+    <td style="padding: 10px;">Willy Obeth Rante</td>
+    <td style="padding: 10px;">VII.11</td>
+    <td style="padding: 10px; text-align: center;">4</td>
+    <td style="padding: 10px; text-align: center;">0</td>
+    <td style="padding: 10px; text-align: center;">1</td>
+    <td style="padding: 10px; text-align: center; font-weight: bold;">0</td>
+</tr>
+<tr style="border-bottom: 1px solid #eee;">
+    <td style="padding: 10px;">Alicia Dwi Kristiani</td>
+    <td style="padding: 10px;">VIII.3</td>
+    <td style="padding: 10px; text-align: center;">5</td>
+    <td style="padding: 10px; text-align: center;">0</td>
+    <td style="padding: 10px; text-align: center;">0</td>
+    <td style="padding: 10px; text-align: center; font-weight: bold;">0</td>
+</tr>
+<tr style="border-bottom: 1px solid #eee;">
+    <td style="padding: 10px;">Alicia Quinnisa</td>
+    <td style="padding: 10px;">VIII.3</td>
+    <td style="padding: 10px; text-align: center;">4</td>
+    <td style="padding: 10px; text-align: center;">0</td>
+    <td style="padding: 10px; text-align: center;">0</td>
+    <td style="padding: 10px; text-align: center; font-weight: bold;">1</td>
+</tr>
+<tr style="border-bottom: 1px solid #eee;">
+    <td style="padding: 10px;">Arsel Biro Sambeko</td>
+    <td style="padding: 10px;">VIII.3</td>
+    <td style="padding: 10px; text-align: center;">5</td>
+    <td style="padding: 10px; text-align: center;">0</td>
+    <td style="padding: 10px; text-align: center;">0</td>
+    <td style="padding: 10px; text-align: center; font-weight: bold;">0</td>
+</tr>
+<tr style="border-bottom: 1px solid #eee;">
+    <td style="padding: 10px;">Beatrice Aprilliani Theona Brant</td>
+    <td style="padding: 10px;">VIII.3</td>
+    <td style="padding: 10px; text-align: center;">2</td>
+    <td style="padding: 10px; text-align: center;">1</td>
+    <td style="padding: 10px; text-align: center;">0</td>
+    <td style="padding: 10px; text-align: center; font-weight: bold;">2</td>
+</tr>
+<tr style="border-bottom: 1px solid #eee;">
+    <td style="padding: 10px;">Bennedict Arthur Patandean</td>
+    <td style="padding: 10px;">VIII.3</td>
+    <td style="padding: 10px; text-align: center;">4</td>
+    <td style="padding: 10px; text-align: center;">0</td>
+    <td style="padding: 10px; text-align: center;">0</td>
+    <td style="padding: 10px; text-align: center; font-weight: bold;">1</td>
+</tr>
+<tr style="border-bottom: 1px solid #eee;">
+    <td style="padding: 10px;">Destri Todi Payung</td>
+    <td style="padding: 10px;">VIII.3</td>
+    <td style="padding: 10px; text-align: center;">4</td>
+    <td style="padding: 10px; text-align: center;">1</td>
+    <td style="padding: 10px; text-align: center;">0</td>
+    <td style="padding: 10px; text-align: center; font-weight: bold;">0</td>
+</tr>
+<tr style="border-bottom: 1px solid #eee;">
+    <td style="padding: 10px;">Emmanuel Chandra Soisarah</td>
+    <td style="padding: 10px;">VIII.3</td>
+    <td style="padding: 10px; text-align: center;">3</td>
+    <td style="padding: 10px; text-align: center;">1</td>
+    <td style="padding: 10px; text-align: center;">0</td>
+    <td style="padding: 10px; text-align: center; font-weight: bold;">1</td>
+</tr>
+<tr style="border-bottom: 1px solid #eee;">
+    <td style="padding: 10px;">Fatir Tegar Georaldi Passanea</td>
+    <td style="padding: 10px;">VIII.3</td>
+    <td style="padding: 10px; text-align: center;">4</td>
+    <td style="padding: 10px; text-align: center;">0</td>
+    <td style="padding: 10px; text-align: center;">0</td>
+    <td style="padding: 10px; text-align: center; font-weight: bold;">1</td>
+</tr>
+<tr style="border-bottom: 1px solid #eee;">
+    <td style="padding: 10px;">Firmantio Enaba</td>
+    <td style="padding: 10px;">VIII.3</td>
+    <td style="padding: 10px; text-align: center;">2</td>
+    <td style="padding: 10px; text-align: center;">0</td>
+    <td style="padding: 10px; text-align: center;">0</td>
+    <td style="padding: 10px; text-align: center; font-weight: bold;">3</td>
+</tr>
+<tr style="border-bottom: 1px solid #eee;">
+    <td style="padding: 10px;">Frederica Dolorosa Ponggawa</td>
+    <td style="padding: 10px;">VIII.3</td>
+    <td style="padding: 10px; text-align: center;">5</td>
+    <td style="padding: 10px; text-align: center;">0</td>
+    <td style="padding: 10px; text-align: center;">0</td>
+    <td style="padding: 10px; text-align: center; font-weight: bold;">0</td>
+</tr>
+<tr style="border-bottom: 1px solid #eee;">
+    <td style="padding: 10px;">Jacqueline Mychel Noya</td>
+    <td style="padding: 10px;">VIII.3</td>
+    <td style="padding: 10px; text-align: center;">3</td>
+    <td style="padding: 10px; text-align: center;">2</td>
+    <td style="padding: 10px; text-align: center;">0</td>
+    <td style="padding: 10px; text-align: center; font-weight: bold;">0</td>
+</tr>
+<tr style="border-bottom: 1px solid #eee;">
+    <td style="padding: 10px;">Joyce Kesaktian Omega Robert</td>
+    <td style="padding: 10px;">VIII.3</td>
+    <td style="padding: 10px; text-align: center;">5</td>
+    <td style="padding: 10px; text-align: center;">0</td>
+    <td style="padding: 10px; text-align: center;">0</td>
+    <td style="padding: 10px; text-align: center; font-weight: bold;">0</td>
+</tr>
+<tr style="border-bottom: 1px solid #eee;">
+    <td style="padding: 10px;">Julietri Langi' Lebok</td>
+    <td style="padding: 10px;">VIII.3</td>
+    <td style="padding: 10px; text-align: center;">5</td>
+    <td style="padding: 10px; text-align: center;">0</td>
+    <td style="padding: 10px; text-align: center;">0</td>
+    <td style="padding: 10px; text-align: center; font-weight: bold;">0</td>
+</tr>
+<tr style="border-bottom: 1px solid #eee;">
+    <td style="padding: 10px;">Kyeint Delvito Malla</td>
+    <td style="padding: 10px;">VIII.3</td>
+    <td style="padding: 10px; text-align: center;">5</td>
+    <td style="padding: 10px; text-align: center;">0</td>
+    <td style="padding: 10px; text-align: center;">0</td>
+    <td style="padding: 10px; text-align: center; font-weight: bold;">0</td>
+</tr>
+<tr style="border-bottom: 1px solid #eee;">
+    <td style="padding: 10px;">Lionel Dave Febrianto</td>
+    <td style="padding: 10px;">VIII.3</td>
+    <td style="padding: 10px; text-align: center;">5</td>
+    <td style="padding: 10px; text-align: center;">0</td>
+    <td style="padding: 10px; text-align: center;">0</td>
+    <td style="padding: 10px; text-align: center; font-weight: bold;">0</td>
+</tr>
+<tr style="border-bottom: 1px solid #eee;">
+    <td style="padding: 10px;">Natalia Dealova Cheysia Jebaut</td>
+    <td style="padding: 10px;">VIII.3</td>
+    <td style="padding: 10px; text-align: center;">4</td>
+    <td style="padding: 10px; text-align: center;">0</td>
+    <td style="padding: 10px; text-align: center;">0</td>
+    <td style="padding: 10px; text-align: center; font-weight: bold;">1</td>
+</tr>
+<tr style="border-bottom: 1px solid #eee;">
+    <td style="padding: 10px;">Natalia Selina Loga</td>
+    <td style="padding: 10px;">VIII.3</td>
+    <td style="padding: 10px; text-align: center;">5</td>
+    <td style="padding: 10px; text-align: center;">0</td>
+    <td style="padding: 10px; text-align: center;">0</td>
+    <td style="padding: 10px; text-align: center; font-weight: bold;">0</td>
+</tr>
+<tr style="border-bottom: 1px solid #eee;">
+    <td style="padding: 10px;">Sherly Lovely Alexander</td>
+    <td style="padding: 10px;">VIII.3</td>
+    <td style="padding: 10px; text-align: center;">3</td>
+    <td style="padding: 10px; text-align: center;">0</td>
+    <td style="padding: 10px; text-align: center;">2</td>
+    <td style="padding: 10px; text-align: center; font-weight: bold;">0</td>
+</tr>
+<tr style="border-bottom: 1px solid #eee;">
+    <td style="padding: 10px;">Valencia Vina Jessica Palembangan</td>
+    <td style="padding: 10px;">VIII.3</td>
+    <td style="padding: 10px; text-align: center;">5</td>
+    <td style="padding: 10px; text-align: center;">0</td>
+    <td style="padding: 10px; text-align: center;">0</td>
+    <td style="padding: 10px; text-align: center; font-weight: bold;">0</td>
+</tr>
+<tr style="border-bottom: 1px solid #eee;">
+    <td style="padding: 10px;">Viktorya Geno Vevat</td>
+    <td style="padding: 10px;">VIII.3</td>
+    <td style="padding: 10px; text-align: center;">2</td>
+    <td style="padding: 10px; text-align: center;">1</td>
+    <td style="padding: 10px; text-align: center;">1</td>
+    <td style="padding: 10px; text-align: center; font-weight: bold;">1</td>
+</tr>
+<tr style="border-bottom: 1px solid #eee;">
+    <td style="padding: 10px;">Viola Jensiana Dona</td>
+    <td style="padding: 10px;">VIII.3</td>
+    <td style="padding: 10px; text-align: center;">5</td>
+    <td style="padding: 10px; text-align: center;">0</td>
+    <td style="padding: 10px; text-align: center;">0</td>
+    <td style="padding: 10px; text-align: center; font-weight: bold;">0</td>
+</tr>
+<tr style="border-bottom: 1px solid #eee;">
+    <td style="padding: 10px;">Agatha Aleandra Tamba</td>
+    <td style="padding: 10px;">VIII.7</td>
+    <td style="padding: 10px; text-align: center;">3</td>
+    <td style="padding: 10px; text-align: center;">0</td>
+    <td style="padding: 10px; text-align: center;">1</td>
+    <td style="padding: 10px; text-align: center; font-weight: bold;">0</td>
+</tr>
+<tr style="border-bottom: 1px solid #eee;">
+    <td style="padding: 10px;">Chalfin Christofel Robo</td>
+    <td style="padding: 10px;">VIII.7</td>
+    <td style="padding: 10px; text-align: center;">3</td>
+    <td style="padding: 10px; text-align: center;">0</td>
+    <td style="padding: 10px; text-align: center;">0</td>
+    <td style="padding: 10px; text-align: center; font-weight: bold;">1</td>
+</tr>
+<tr style="border-bottom: 1px solid #eee;">
+    <td style="padding: 10px;">Christie Angelique Titaheluw</td>
+    <td style="padding: 10px;">VIII.7</td>
+    <td style="padding: 10px; text-align: center;">1</td>
+    <td style="padding: 10px; text-align: center;">1</td>
+    <td style="padding: 10px; text-align: center;">0</td>
+    <td style="padding: 10px; text-align: center; font-weight: bold;">2</td>
+</tr>
+<tr style="border-bottom: 1px solid #eee;">
+    <td style="padding: 10px;">Chrystopher David Emil</td>
+    <td style="padding: 10px;">VIII.7</td>
+    <td style="padding: 10px; text-align: center;">4</td>
+    <td style="padding: 10px; text-align: center;">0</td>
+    <td style="padding: 10px; text-align: center;">0</td>
+    <td style="padding: 10px; text-align: center; font-weight: bold;">0</td>
+</tr>
+<tr style="border-bottom: 1px solid #eee;">
+    <td style="padding: 10px;">Dirga Putragusti</td>
+    <td style="padding: 10px;">VIII.7</td>
+    <td style="padding: 10px; text-align: center;">2</td>
+    <td style="padding: 10px; text-align: center;">0</td>
+    <td style="padding: 10px; text-align: center;">0</td>
+    <td style="padding: 10px; text-align: center; font-weight: bold;">2</td>
+</tr>
+<tr style="border-bottom: 1px solid #eee;">
+    <td style="padding: 10px;">Dwi Afrillia Putri Agung</td>
+    <td style="padding: 10px;">VIII.7</td>
+    <td style="padding: 10px; text-align: center;">3</td>
+    <td style="padding: 10px; text-align: center;">0</td>
+    <td style="padding: 10px; text-align: center;">1</td>
+    <td style="padding: 10px; text-align: center; font-weight: bold;">0</td>
+</tr>
+<tr style="border-bottom: 1px solid #eee;">
+    <td style="padding: 10px;">Eunike Oktivania Rande</td>
+    <td style="padding: 10px;">VIII.7</td>
+    <td style="padding: 10px; text-align: center;">4</td>
+    <td style="padding: 10px; text-align: center;">0</td>
+    <td style="padding: 10px; text-align: center;">0</td>
+    <td style="padding: 10px; text-align: center; font-weight: bold;">0</td>
+</tr>
+<tr style="border-bottom: 1px solid #eee;">
+    <td style="padding: 10px;">Frederic Derilliano Iwan</td>
+    <td style="padding: 10px;">VIII.7</td>
+    <td style="padding: 10px; text-align: center;">4</td>
+    <td style="padding: 10px; text-align: center;">0</td>
+    <td style="padding: 10px; text-align: center;">0</td>
+    <td style="padding: 10px; text-align: center; font-weight: bold;">0</td>
+</tr>
+<tr style="border-bottom: 1px solid #eee;">
+    <td style="padding: 10px;">Gilbert Aprillio Kadang</td>
+    <td style="padding: 10px;">VIII.7</td>
+    <td style="padding: 10px; text-align: center;">4</td>
+    <td style="padding: 10px; text-align: center;">0</td>
+    <td style="padding: 10px; text-align: center;">0</td>
+    <td style="padding: 10px; text-align: center; font-weight: bold;">0</td>
+</tr>
+<tr style="border-bottom: 1px solid #eee;">
+    <td style="padding: 10px;">Imelda Meilepin</td>
+    <td style="padding: 10px;">VIII.7</td>
+    <td style="padding: 10px; text-align: center;">2</td>
+    <td style="padding: 10px; text-align: center;">0</td>
+    <td style="padding: 10px; text-align: center;">2</td>
+    <td style="padding: 10px; text-align: center; font-weight: bold;">0</td>
+</tr>
+<tr style="border-bottom: 1px solid #eee;">
+    <td style="padding: 10px;">Jesua Dominggus Parera JR</td>
+    <td style="padding: 10px;">VIII.7</td>
+    <td style="padding: 10px; text-align: center;">1</td>
+    <td style="padding: 10px; text-align: center;">2</td>
+    <td style="padding: 10px; text-align: center;">1</td>
+    <td style="padding: 10px; text-align: center; font-weight: bold;">0</td>
+</tr>
+<tr style="border-bottom: 1px solid #eee;">
+    <td style="padding: 10px;">Madelyn Victoria Pangli Salle</td>
+    <td style="padding: 10px;">VIII.7</td>
+    <td style="padding: 10px; text-align: center;">4</td>
+    <td style="padding: 10px; text-align: center;">0</td>
+    <td style="padding: 10px; text-align: center;">0</td>
+    <td style="padding: 10px; text-align: center; font-weight: bold;">0</td>
+</tr>
+<tr style="border-bottom: 1px solid #eee;">
+    <td style="padding: 10px;">Michael Ella Sillano</td>
+    <td style="padding: 10px;">VIII.7</td>
+    <td style="padding: 10px; text-align: center;">4</td>
+    <td style="padding: 10px; text-align: center;">0</td>
+    <td style="padding: 10px; text-align: center;">0</td>
+    <td style="padding: 10px; text-align: center; font-weight: bold;">0</td>
+</tr>
+<tr style="border-bottom: 1px solid #eee;">
+    <td style="padding: 10px;">Michael Jonathan Tandisau</td>
+    <td style="padding: 10px;">VIII.7</td>
+    <td style="padding: 10px; text-align: center;">4</td>
+    <td style="padding: 10px; text-align: center;">0</td>
+    <td style="padding: 10px; text-align: center;">0</td>
+    <td style="padding: 10px; text-align: center; font-weight: bold;">0</td>
+</tr>
+<tr style="border-bottom: 1px solid #eee;">
+    <td style="padding: 10px;">Michayla Angelica Hamdja</td>
+    <td style="padding: 10px;">VIII.7</td>
+    <td style="padding: 10px; text-align: center;">4</td>
+    <td style="padding: 10px; text-align: center;">0</td>
+    <td style="padding: 10px; text-align: center;">0</td>
+    <td style="padding: 10px; text-align: center; font-weight: bold;">0</td>
+</tr>
+<tr style="border-bottom: 1px solid #eee;">
+    <td style="padding: 10px;">Mourice Letino Immanuel Miru</td>
+    <td style="padding: 10px;">VIII.7</td>
+    <td style="padding: 10px; text-align: center;">4</td>
+    <td style="padding: 10px; text-align: center;">0</td>
+    <td style="padding: 10px; text-align: center;">0</td>
+    <td style="padding: 10px; text-align: center; font-weight: bold;">0</td>
+</tr>
+<tr style="border-bottom: 1px solid #eee;">
+    <td style="padding: 10px;">Natalia Kristin Putri Lebai</td>
+    <td style="padding: 10px;">VIII.7</td>
+    <td style="padding: 10px; text-align: center;">4</td>
+    <td style="padding: 10px; text-align: center;">0</td>
+    <td style="padding: 10px; text-align: center;">0</td>
+    <td style="padding: 10px; text-align: center; font-weight: bold;">0</td>
+</tr>
+<tr style="border-bottom: 1px solid #eee;">
+    <td style="padding: 10px;">Panesa Ranak</td>
+    <td style="padding: 10px;">VIII.7</td>
+    <td style="padding: 10px; text-align: center;">4</td>
+    <td style="padding: 10px; text-align: center;">0</td>
+    <td style="padding: 10px; text-align: center;">0</td>
+    <td style="padding: 10px; text-align: center; font-weight: bold;">0</td>
+</tr>
+<tr style="border-bottom: 1px solid #eee;">
+    <td style="padding: 10px;">Queen Angel</td>
+    <td style="padding: 10px;">VIII.7</td>
+    <td style="padding: 10px; text-align: center;">3</td>
+    <td style="padding: 10px; text-align: center;">0</td>
+    <td style="padding: 10px; text-align: center;">0</td>
+    <td style="padding: 10px; text-align: center; font-weight: bold;">1</td>
+</tr>
+<tr style="border-bottom: 1px solid #eee;">
+    <td style="padding: 10px;">Queeny Davine Imannuela</td>
+    <td style="padding: 10px;">VIII.7</td>
+    <td style="padding: 10px; text-align: center;">4</td>
+    <td style="padding: 10px; text-align: center;">0</td>
+    <td style="padding: 10px; text-align: center;">0</td>
+    <td style="padding: 10px; text-align: center; font-weight: bold;">0</td>
+</tr>
+<tr style="border-bottom: 1px solid #eee;">
+    <td style="padding: 10px;">Rainatyo Octavcian Dwitama</td>
+    <td style="padding: 10px;">VIII.7</td>
+    <td style="padding: 10px; text-align: center;">4</td>
+    <td style="padding: 10px; text-align: center;">0</td>
+    <td style="padding: 10px; text-align: center;">0</td>
+    <td style="padding: 10px; text-align: center; font-weight: bold;">0</td>
+</tr>
+<tr style="border-bottom: 1px solid #eee;">
+    <td style="padding: 10px;">Rayen Oktavianus</td>
+    <td style="padding: 10px;">VIII.7</td>
+    <td style="padding: 10px; text-align: center;">4</td>
+    <td style="padding: 10px; text-align: center;">0</td>
+    <td style="padding: 10px; text-align: center;">0</td>
+    <td style="padding: 10px; text-align: center; font-weight: bold;">0</td>
+</tr>
+<tr style="border-bottom: 1px solid #eee;">
+    <td style="padding: 10px;">Salfa Gina Sahira</td>
+    <td style="padding: 10px;">VIII.7</td>
+    <td style="padding: 10px; text-align: center;">2</td>
+    <td style="padding: 10px; text-align: center;">1</td>
+    <td style="padding: 10px; text-align: center;">0</td>
+    <td style="padding: 10px; text-align: center; font-weight: bold;">1</td>
+</tr>
+<tr style="border-bottom: 1px solid #eee;">
+    <td style="padding: 10px;">Vinel Natania Bela</td>
+    <td style="padding: 10px;">VIII.7</td>
+    <td style="padding: 10px; text-align: center;">4</td>
+    <td style="padding: 10px; text-align: center;">0</td>
+    <td style="padding: 10px; text-align: center;">0</td>
+    <td style="padding: 10px; text-align: center; font-weight: bold;">0</td>
+</tr>
+<tr style="border-bottom: 1px solid #eee;">
+    <td style="padding: 10px;">Yithrow Rehuel Sillo</td>
+    <td style="padding: 10px;">VIII.7</td>
+    <td style="padding: 10px; text-align: center;">4</td>
+    <td style="padding: 10px; text-align: center;">0</td>
+    <td style="padding: 10px; text-align: center;">0</td>
+    <td style="padding: 10px; text-align: center; font-weight: bold;">0</td>
+</tr>
+<tr style="border-bottom: 1px solid #eee;">
+    <td style="padding: 10px;">Alenz Septiyan Tanggo</td>
+    <td style="padding: 10px;">VIII.11</td>
+    <td style="padding: 10px; text-align: center;">3</td>
+    <td style="padding: 10px; text-align: center;">1</td>
+    <td style="padding: 10px; text-align: center;">0</td>
+    <td style="padding: 10px; text-align: center; font-weight: bold;">1</td>
+</tr>
+<tr style="border-bottom: 1px solid #eee;">
+    <td style="padding: 10px;">Andi Melody Emmanuella</td>
+    <td style="padding: 10px;">VIII.11</td>
+    <td style="padding: 10px; text-align: center;">4</td>
+    <td style="padding: 10px; text-align: center;">1</td>
+    <td style="padding: 10px; text-align: center;">0</td>
+    <td style="padding: 10px; text-align: center; font-weight: bold;">0</td>
+</tr>
+<tr style="border-bottom: 1px solid #eee;">
+    <td style="padding: 10px;">Arcelia Nathania Wantalangi</td>
+    <td style="padding: 10px;">VIII.11</td>
+    <td style="padding: 10px; text-align: center;">5</td>
+    <td style="padding: 10px; text-align: center;">0</td>
+    <td style="padding: 10px; text-align: center;">0</td>
+    <td style="padding: 10px; text-align: center; font-weight: bold;">0</td>
+</tr>
+<tr style="border-bottom: 1px solid #eee;">
+    <td style="padding: 10px;">Gabriella Christiani Cataleya</td>
+    <td style="padding: 10px;">VIII.11</td>
+    <td style="padding: 10px; text-align: center;">4</td>
+    <td style="padding: 10px; text-align: center;">1</td>
+    <td style="padding: 10px; text-align: center;">0</td>
+    <td style="padding: 10px; text-align: center; font-weight: bold;">0</td>
+</tr>
+<tr style="border-bottom: 1px solid #eee;">
+    <td style="padding: 10px;">Hanna Aurelia Bela</td>
+    <td style="padding: 10px;">VIII.11</td>
+    <td style="padding: 10px; text-align: center;">5</td>
+    <td style="padding: 10px; text-align: center;">0</td>
+    <td style="padding: 10px; text-align: center;">0</td>
+    <td style="padding: 10px; text-align: center; font-weight: bold;">0</td>
+</tr>
+<tr style="border-bottom: 1px solid #eee;">
+    <td style="padding: 10px;">Jovan Fidy Leonard Siegers</td>
+    <td style="padding: 10px;">VIII.11</td>
+    <td style="padding: 10px; text-align: center;">2</td>
+    <td style="padding: 10px; text-align: center;">1</td>
+    <td style="padding: 10px; text-align: center;">1</td>
+    <td style="padding: 10px; text-align: center; font-weight: bold;">1</td>
+</tr>
+<tr style="border-bottom: 1px solid #eee;">
+    <td style="padding: 10px;">Kheinetha Amanda</td>
+    <td style="padding: 10px;">VIII.11</td>
+    <td style="padding: 10px; text-align: center;">2</td>
+    <td style="padding: 10px; text-align: center;">2</td>
+    <td style="padding: 10px; text-align: center;">1</td>
+    <td style="padding: 10px; text-align: center; font-weight: bold;">0</td>
+</tr>
+<tr style="border-bottom: 1px solid #eee;">
+    <td style="padding: 10px;">Marcella Anastasya Sandur</td>
+    <td style="padding: 10px;">VIII.11</td>
+    <td style="padding: 10px; text-align: center;">2</td>
+    <td style="padding: 10px; text-align: center;">0</td>
+    <td style="padding: 10px; text-align: center;">2</td>
+    <td style="padding: 10px; text-align: center; font-weight: bold;">1</td>
+</tr>
+<tr style="border-bottom: 1px solid #eee;">
+    <td style="padding: 10px;">Maurizio Nathanael Kumambong</td>
+    <td style="padding: 10px;">VIII.11</td>
+    <td style="padding: 10px; text-align: center;">5</td>
+    <td style="padding: 10px; text-align: center;">0</td>
+    <td style="padding: 10px; text-align: center;">0</td>
+    <td style="padding: 10px; text-align: center; font-weight: bold;">0</td>
+</tr>
+<tr style="border-bottom: 1px solid #eee;">
+    <td style="padding: 10px;">Nadal Linxindo Sopa Cua</td>
+    <td style="padding: 10px;">VIII.11</td>
+    <td style="padding: 10px; text-align: center;">1</td>
+    <td style="padding: 10px; text-align: center;">0</td>
+    <td style="padding: 10px; text-align: center;">0</td>
+    <td style="padding: 10px; text-align: center; font-weight: bold;">4</td>
+</tr>
+<tr style="border-bottom: 1px solid #eee;">
+    <td style="padding: 10px;">Widya Nisa Tiranda</td>
+    <td style="padding: 10px;">VIII.11</td>
+    <td style="padding: 10px; text-align: center;">5</td>
+    <td style="padding: 10px; text-align: center;">0</td>
+    <td style="padding: 10px; text-align: center;">0</td>
+    <td style="padding: 10px; text-align: center; font-weight: bold;">0</td>
+</tr>
+<tr style="border-bottom: 1px solid #eee;">
+    <td style="padding: 10px;">Attaya Kayza</td>
+    <td style="padding: 10px;">IX.3</td>
+    <td style="padding: 10px; text-align: center;">4</td>
+    <td style="padding: 10px; text-align: center;">0</td>
+    <td style="padding: 10px; text-align: center;">0</td>
+    <td style="padding: 10px; text-align: center; font-weight: bold;">0</td>
+</tr>
+<tr style="border-bottom: 1px solid #eee;">
+    <td style="padding: 10px;">Bari Adinata</td>
+    <td style="padding: 10px;">IX.3</td>
+    <td style="padding: 10px; text-align: center;">0</td>
+    <td style="padding: 10px; text-align: center;">0</td>
+    <td style="padding: 10px; text-align: center;">0</td>
+    <td style="padding: 10px; text-align: center; font-weight: bold;">4</td>
+</tr>
+<tr style="border-bottom: 1px solid #eee;">
+    <td style="padding: 10px;">Dennys Imanuel Endrow</td>
+    <td style="padding: 10px;">IX.3</td>
+    <td style="padding: 10px; text-align: center;">1</td>
+    <td style="padding: 10px; text-align: center;">0</td>
+    <td style="padding: 10px; text-align: center;">0</td>
+    <td style="padding: 10px; text-align: center; font-weight: bold;">3</td>
+</tr>
+<tr style="border-bottom: 1px solid #eee;">
+    <td style="padding: 10px;">Evelyn Natasha Manda</td>
+    <td style="padding: 10px;">IX.3</td>
+    <td style="padding: 10px; text-align: center;">4</td>
+    <td style="padding: 10px; text-align: center;">0</td>
+    <td style="padding: 10px; text-align: center;">0</td>
+    <td style="padding: 10px; text-align: center; font-weight: bold;">0</td>
+</tr>
+<tr style="border-bottom: 1px solid #eee;">
+    <td style="padding: 10px;">Febrianti Liling Butungan</td>
+    <td style="padding: 10px;">IX.3</td>
+    <td style="padding: 10px; text-align: center;">4</td>
+    <td style="padding: 10px; text-align: center;">0</td>
+    <td style="padding: 10px; text-align: center;">0</td>
+    <td style="padding: 10px; text-align: center; font-weight: bold;">0</td>
+</tr>
+<tr style="border-bottom: 1px solid #eee;">
+    <td style="padding: 10px;">Geraldus Tanan</td>
+    <td style="padding: 10px;">IX.3</td>
+    <td style="padding: 10px; text-align: center;">1</td>
+    <td style="padding: 10px; text-align: center;">0</td>
+    <td style="padding: 10px; text-align: center;">1</td>
+    <td style="padding: 10px; text-align: center; font-weight: bold;">2</td>
+</tr>
+<tr style="border-bottom: 1px solid #eee;">
+    <td style="padding: 10px;">Gloria Anastasya Tande Padang Sihombing</td>
+    <td style="padding: 10px;">IX.3</td>
+    <td style="padding: 10px; text-align: center;">4</td>
+    <td style="padding: 10px; text-align: center;">0</td>
+    <td style="padding: 10px; text-align: center;">0</td>
+    <td style="padding: 10px; text-align: center; font-weight: bold;">0</td>
+</tr>
+<tr style="border-bottom: 1px solid #eee;">
+    <td style="padding: 10px;">Jehovah Nevan Marjess</td>
+    <td style="padding: 10px;">IX.3</td>
+    <td style="padding: 10px; text-align: center;">2</td>
+    <td style="padding: 10px; text-align: center;">0</td>
+    <td style="padding: 10px; text-align: center;">0</td>
+    <td style="padding: 10px; text-align: center; font-weight: bold;">2</td>
+</tr>
+<tr style="border-bottom: 1px solid #eee;">
+    <td style="padding: 10px;">Maria Chinthya Tandi Ayu</td>
+    <td style="padding: 10px;">IX.3</td>
+    <td style="padding: 10px; text-align: center;">4</td>
+    <td style="padding: 10px; text-align: center;">0</td>
+    <td style="padding: 10px; text-align: center;">0</td>
+    <td style="padding: 10px; text-align: center; font-weight: bold;">0</td>
+</tr>
+<tr style="border-bottom: 1px solid #eee;">
+    <td style="padding: 10px;">Nayla Putri Keyza</td>
+    <td style="padding: 10px;">IX.3</td>
+    <td style="padding: 10px; text-align: center;">1</td>
+    <td style="padding: 10px; text-align: center;">0</td>
+    <td style="padding: 10px; text-align: center;">0</td>
+    <td style="padding: 10px; text-align: center; font-weight: bold;">3</td>
+</tr>
+<tr style="border-bottom: 1px solid #eee;">
+    <td style="padding: 10px;">Queen Daniela Puaso</td>
+    <td style="padding: 10px;">IX.3</td>
+    <td style="padding: 10px; text-align: center;">4</td>
+    <td style="padding: 10px; text-align: center;">0</td>
+    <td style="padding: 10px; text-align: center;">0</td>
+    <td style="padding: 10px; text-align: center; font-weight: bold;">0</td>
+</tr>
+<tr style="border-bottom: 1px solid #eee;">
+    <td style="padding: 10px;">Shanne Kaylane</td>
+    <td style="padding: 10px;">IX.3</td>
+    <td style="padding: 10px; text-align: center;">1</td>
+    <td style="padding: 10px; text-align: center;">0</td>
+    <td style="padding: 10px; text-align: center;">1</td>
+    <td style="padding: 10px; text-align: center; font-weight: bold;">2</td>
+</tr>
+<tr style="border-bottom: 1px solid #eee;">
+    <td style="padding: 10px;">Yefta Rafael Wolah</td>
+    <td style="padding: 10px;">IX.3</td>
+    <td style="padding: 10px; text-align: center;">4</td>
+    <td style="padding: 10px; text-align: center;">0</td>
+    <td style="padding: 10px; text-align: center;">0</td>
+    <td style="padding: 10px; text-align: center; font-weight: bold;">0</td>
+</tr>
+<tr style="border-bottom: 1px solid #eee;">
+    <td style="padding: 10px;">Yurien Yuruni Bokko</td>
+    <td style="padding: 10px;">IX.3</td>
+    <td style="padding: 10px; text-align: center;">4</td>
+    <td style="padding: 10px; text-align: center;">0</td>
+    <td style="padding: 10px; text-align: center;">0</td>
+    <td style="padding: 10px; text-align: center; font-weight: bold;">0</td>
+</tr>
+<tr style="border-bottom: 1px solid #eee;">
+    <td style="padding: 10px;">Adonia Permata Sukma</td>
+    <td style="padding: 10px;">IX.7</td>
+    <td style="padding: 10px; text-align: center;">4</td>
+    <td style="padding: 10px; text-align: center;">0</td>
+    <td style="padding: 10px; text-align: center;">0</td>
+    <td style="padding: 10px; text-align: center; font-weight: bold;">0</td>
+</tr>
+<tr style="border-bottom: 1px solid #eee;">
+    <td style="padding: 10px;">Andrew Gwyn Christopher Fattah</td>
+    <td style="padding: 10px;">IX.7</td>
+    <td style="padding: 10px; text-align: center;">3</td>
+    <td style="padding: 10px; text-align: center;">0</td>
+    <td style="padding: 10px; text-align: center;">0</td>
+    <td style="padding: 10px; text-align: center; font-weight: bold;">1</td>
+</tr>
+<tr style="border-bottom: 1px solid #eee;">
+    <td style="padding: 10px;">Betelgeuse Aurelia Tosuly</td>
+    <td style="padding: 10px;">IX.7</td>
+    <td style="padding: 10px; text-align: center;">2</td>
+    <td style="padding: 10px; text-align: center;">0</td>
+    <td style="padding: 10px; text-align: center;">1</td>
+    <td style="padding: 10px; text-align: center; font-weight: bold;">1</td>
+</tr>
+<tr style="border-bottom: 1px solid #eee;">
+    <td style="padding: 10px;">Christophe Joachim Sewang</td>
+    <td style="padding: 10px;">IX.7</td>
+    <td style="padding: 10px; text-align: center;">3</td>
+    <td style="padding: 10px; text-align: center;">0</td>
+    <td style="padding: 10px; text-align: center;">0</td>
+    <td style="padding: 10px; text-align: center; font-weight: bold;">1</td>
+</tr>
+<tr style="border-bottom: 1px solid #eee;">
+    <td style="padding: 10px;">Davin Imanuel Bumbungan</td>
+    <td style="padding: 10px;">IX.7</td>
+    <td style="padding: 10px; text-align: center;">4</td>
+    <td style="padding: 10px; text-align: center;">0</td>
+    <td style="padding: 10px; text-align: center;">0</td>
+    <td style="padding: 10px; text-align: center; font-weight: bold;">0</td>
+</tr>
+<tr style="border-bottom: 1px solid #eee;">
+    <td style="padding: 10px;">Eduardus Kevin Alvaro Rangga</td>
+    <td style="padding: 10px;">IX.7</td>
+    <td style="padding: 10px; text-align: center;">2</td>
+    <td style="padding: 10px; text-align: center;">0</td>
+    <td style="padding: 10px; text-align: center;">0</td>
+    <td style="padding: 10px; text-align: center; font-weight: bold;">2</td>
+</tr>
+<tr style="border-bottom: 1px solid #eee;">
+    <td style="padding: 10px;">Friyoga Joni Sulu</td>
+    <td style="padding: 10px;">IX.7</td>
+    <td style="padding: 10px; text-align: center;">3</td>
+    <td style="padding: 10px; text-align: center;">0</td>
+    <td style="padding: 10px; text-align: center;">0</td>
+    <td style="padding: 10px; text-align: center; font-weight: bold;">0</td>
+</tr>
+<tr style="border-bottom: 1px solid #eee;">
+    <td style="padding: 10px;">Keanu Michael Pondaag</td>
+    <td style="padding: 10px;">IX.7</td>
+    <td style="padding: 10px; text-align: center;">3</td>
+    <td style="padding: 10px; text-align: center;">0</td>
+    <td style="padding: 10px; text-align: center;">0</td>
+    <td style="padding: 10px; text-align: center; font-weight: bold;">1</td>
+</tr>
+<tr style="border-bottom: 1px solid #eee;">
+    <td style="padding: 10px;">Laiqa Desiree Eleonora Madjid</td>
+    <td style="padding: 10px;">IX.7</td>
+    <td style="padding: 10px; text-align: center;">3</td>
+    <td style="padding: 10px; text-align: center;">0</td>
+    <td style="padding: 10px; text-align: center;">0</td>
+    <td style="padding: 10px; text-align: center; font-weight: bold;">1</td>
+</tr>
+<tr style="border-bottom: 1px solid #eee;">
+    <td style="padding: 10px;">Melikha Putri Warankiran</td>
+    <td style="padding: 10px;">IX.7</td>
+    <td style="padding: 10px; text-align: center;">3</td>
+    <td style="padding: 10px; text-align: center;">0</td>
+    <td style="padding: 10px; text-align: center;">1</td>
+    <td style="padding: 10px; text-align: center; font-weight: bold;">0</td>
+</tr>
+<tr style="border-bottom: 1px solid #eee;">
+    <td style="padding: 10px;">Rahma Unggul Esa Sari</td>
+    <td style="padding: 10px;">IX.7</td>
+    <td style="padding: 10px; text-align: center;">4</td>
+    <td style="padding: 10px; text-align: center;">0</td>
+    <td style="padding: 10px; text-align: center;">0</td>
+    <td style="padding: 10px; text-align: center; font-weight: bold;">0</td>
+</tr>
+<tr style="border-bottom: 1px solid #eee;">
+    <td style="padding: 10px;">Sean Gilles Hogendorp</td>
+    <td style="padding: 10px;">IX.7</td>
+    <td style="padding: 10px; text-align: center;">3</td>
+    <td style="padding: 10px; text-align: center;">0</td>
+    <td style="padding: 10px; text-align: center;">0</td>
+    <td style="padding: 10px; text-align: center; font-weight: bold;">1</td>
+</tr>
+<tr style="border-bottom: 1px solid #eee;">
+    <td style="padding: 10px;">Septian George Tandi Lallo</td>
+    <td style="padding: 10px;">IX.7</td>
+    <td style="padding: 10px; text-align: center;">2</td>
+    <td style="padding: 10px; text-align: center;">0</td>
+    <td style="padding: 10px; text-align: center;">0</td>
+    <td style="padding: 10px; text-align: center; font-weight: bold;">2</td>
+</tr>
+<tr style="border-bottom: 1px solid #eee;">
+    <td style="padding: 10px;">Valerie Jocelyn</td>
+    <td style="padding: 10px;">IX.7</td>
+    <td style="padding: 10px; text-align: center;">2</td>
+    <td style="padding: 10px; text-align: center;">1</td>
+    <td style="padding: 10px; text-align: center;">0</td>
+    <td style="padding: 10px; text-align: center; font-weight: bold;">1</td>
+</tr>
+<tr style="border-bottom: 1px solid #eee;">
+    <td style="padding: 10px;">Amabel Damara Felisya</td>
+    <td style="padding: 10px;">IX.11</td>
+    <td style="padding: 10px; text-align: center;">2</td>
+    <td style="padding: 10px; text-align: center;">2</td>
+    <td style="padding: 10px; text-align: center;">0</td>
+    <td style="padding: 10px; text-align: center; font-weight: bold;">0</td>
+</tr>
+<tr style="border-bottom: 1px solid #eee;">
+    <td style="padding: 10px;">Brayen Amoldus Lembang</td>
+    <td style="padding: 10px;">IX.11</td>
+    <td style="padding: 10px; text-align: center;">2</td>
+    <td style="padding: 10px; text-align: center;">0</td>
+    <td style="padding: 10px; text-align: center;">0</td>
+    <td style="padding: 10px; text-align: center; font-weight: bold;">2</td>
+</tr>
+<tr style="border-bottom: 1px solid #eee;">
+    <td style="padding: 10px;">Catherine Theresia Korompis</td>
+    <td style="padding: 10px;">IX.11</td>
+    <td style="padding: 10px; text-align: center;">4</td>
+    <td style="padding: 10px; text-align: center;">0</td>
+    <td style="padding: 10px; text-align: center;">0</td>
+    <td style="padding: 10px; text-align: center; font-weight: bold;">0</td>
+</tr>
+<tr style="border-bottom: 1px solid #eee;">
+    <td style="padding: 10px;">Clara Clarissa Adriany</td>
+    <td style="padding: 10px;">IX.11</td>
+    <td style="padding: 10px; text-align: center;">3</td>
+    <td style="padding: 10px; text-align: center;">1</td>
+    <td style="padding: 10px; text-align: center;">0</td>
+    <td style="padding: 10px; text-align: center; font-weight: bold;">0</td>
+</tr>
+<tr style="border-bottom: 1px solid #eee;">
+    <td style="padding: 10px;">Gabriel Desthin Kadang</td>
+    <td style="padding: 10px;">IX.11</td>
+    <td style="padding: 10px; text-align: center;">3</td>
+    <td style="padding: 10px; text-align: center;">0</td>
+    <td style="padding: 10px; text-align: center;">0</td>
+    <td style="padding: 10px; text-align: center; font-weight: bold;">1</td>
+</tr>
+<tr style="border-bottom: 1px solid #eee;">
+    <td style="padding: 10px;">Gabriel Hosana Tamin</td>
+    <td style="padding: 10px;">IX.11</td>
+    <td style="padding: 10px; text-align: center;">3</td>
+    <td style="padding: 10px; text-align: center;">0</td>
+    <td style="padding: 10px; text-align: center;">0</td>
+    <td style="padding: 10px; text-align: center; font-weight: bold;">1</td>
+</tr>
+<tr style="border-bottom: 1px solid #eee;">
+    <td style="padding: 10px;">Gilbert Christopher Pasau</td>
+    <td style="padding: 10px;">IX.11</td>
+    <td style="padding: 10px; text-align: center;">2</td>
+    <td style="padding: 10px; text-align: center;">0</td>
+    <td style="padding: 10px; text-align: center;">0</td>
+    <td style="padding: 10px; text-align: center; font-weight: bold;">2</td>
+</tr>
+<tr style="border-bottom: 1px solid #eee;">
+    <td style="padding: 10px;">Jerem Lordin Padatu</td>
+    <td style="padding: 10px;">IX.11</td>
+    <td style="padding: 10px; text-align: center;">3</td>
+    <td style="padding: 10px; text-align: center;">0</td>
+    <td style="padding: 10px; text-align: center;">0</td>
+    <td style="padding: 10px; text-align: center; font-weight: bold;">1</td>
+</tr>
+<tr style="border-bottom: 1px solid #eee;">
+    <td style="padding: 10px;">Jericho Revan Audriel</td>
+    <td style="padding: 10px;">IX.11</td>
+    <td style="padding: 10px; text-align: center;">2</td>
+    <td style="padding: 10px; text-align: center;">0</td>
+    <td style="padding: 10px; text-align: center;">0</td>
+    <td style="padding: 10px; text-align: center; font-weight: bold;">2</td>
+</tr>
+<tr style="border-bottom: 1px solid #eee;">
+    <td style="padding: 10px;">Jesslyn Anchy Maweru Runtu</td>
+    <td style="padding: 10px;">IX.11</td>
+    <td style="padding: 10px; text-align: center;">3</td>
+    <td style="padding: 10px; text-align: center;">0</td>
+    <td style="padding: 10px; text-align: center;">1</td>
+    <td style="padding: 10px; text-align: center; font-weight: bold;">0</td>
+</tr>
+<tr style="border-bottom: 1px solid #eee;">
+    <td style="padding: 10px;">Marvilya Vacesly</td>
+    <td style="padding: 10px;">IX.11</td>
+    <td style="padding: 10px; text-align: center;">3</td>
+    <td style="padding: 10px; text-align: center;">1</td>
+    <td style="padding: 10px; text-align: center;">0</td>
+    <td style="padding: 10px; text-align: center; font-weight: bold;">0</td>
+</tr>
+<tr style="border-bottom: 1px solid #eee;">
+    <td style="padding: 10px;">Natalicia D. Filemon</td>
+    <td style="padding: 10px;">IX.11</td>
+    <td style="padding: 10px; text-align: center;">4</td>
+    <td style="padding: 10px; text-align: center;">0</td>
+    <td style="padding: 10px; text-align: center;">0</td>
+    <td style="padding: 10px; text-align: center; font-weight: bold;">0</td>
+</tr>
+<tr style="border-bottom: 1px solid #eee;">
+    <td style="padding: 10px;">Paskah Zuriel Sopa Cua</td>
+    <td style="padding: 10px;">IX.11</td>
+    <td style="padding: 10px; text-align: center;">2</td>
+    <td style="padding: 10px; text-align: center;">0</td>
+    <td style="padding: 10px; text-align: center;">0</td>
+    <td style="padding: 10px; text-align: center; font-weight: bold;">2</td>
+            </tr>
+            </tbody>
+    </table>
+    <p style="font-size: 11px; color: #7f8c8d; margin-top: 15px; text-align: center;">
+        *Absen ini adalah absen semester 2 dan dimulai sejak hari Selasa, 13 Januari 2026.
+    </p>
+</div>
+        
+    </script>
+    <div style="background-color: white; padding: 20px; border-radius: 15px; margin-top: 20px; box-shadow: 0 4px 6px rgba(0,0,0,0.1);">
+    <h3 style="text-align: center; color: #2c3e50; margin-bottom: 20px;">Jumlah Persembahan Syukur</h3>
+    
+    <table style="width: 100%; border-collapse: collapse;">
+        <thead>
+            <tr style="background-color: #f2f2f2; border-bottom: 2px solid #ddd;">
+                <th style="padding: 10px; text-align: left;">Hari, Tanggal</th>
+                <th style="padding: 10px; text-align: right;">Jumlah Persembahan</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr style="border-bottom: 1px solid #eee;">
+                <td style="padding: 10px; text-align: left;">Selasa,  10 Februari 2026</td>
+                <th style="padding: 10px; text-align: right;">Rp.73.000</th>
+            <tr style="border-bottom: 1px solid #eee;">
+                <td style="padding: 10px; text-align: left;">Rabu, 04 Februari 2026</td>
+                <th style="padding: 10px; text-align: right;">Rp.183.500</th>
+            <tr style="border-bottom: 1px solid #eee;">
+                <td style="padding: 10px; text-align: left;">Selasa,  03 Februari 2026</td>
+                <th style="padding: 10px; text-align: right;">Rp.72.000</th>
+            <tr style="border-bottom: 1px solid #eee;">
+            <tr style="border-bottom: 1px solid #eee;">
+                <td style="padding: 10px; text-align: left;">Selasa, 27 Januari 2026</td>
+                <th style="padding: 10px; text-align: right;">Rp.77.000</th>
+            <tr style="border-bottom: 1px solid #eee;">
+                <td style="padding: 10px; text-align: left;">Rabu, 21 Januari 2026</td>
+                <th style="padding: 10px; text-align: right;">Rp.108.000</th>
+           </tr>
+            <tr style="border-bottom: 1px solid #eee;">
+                <td style="padding: 10px; text-align: left;">Selasa, 20 Januari 2026</td>
+                <th style="padding: 10px; text-align: right;">Rp.102.000</th>
+          </tr>
+            <tr style="border-bottom: 1px solid #eee;">
+                <td style="padding: 10px; text-align: left;">Rabu, 14 Januari 2026</td>
+                <th style="padding: 10px; text-align: right;">Rp.95.000</th>
+          </tr>
+            <tr style="border-bottom: 1px solid #eee;">
+                <td style="padding: 10px; text-align: left;">Selasa, 13 Januari 2026</td>
+                <th style="padding: 10px; text-align: right;">Rp.65.400</th>
+          </tr>
+            <tr style="border-bottom: 1px solid #eee;">
+                <td style="padding: 10px; text-align: left;">Tahun 2025</td>
+                <th style="padding: 10px; text-align: right;">Rp.2.644.000</th>
+            </tr>
+            </tbody>
+    </table>
+    </p>
+</div>
+    <p style="font-size: 15px; color: #2c3e50; margin-top: 15px; text-align: left;">
+        Designed by Davin Imanuel Bumbungan.
+    <p style="font-size: 15px; color: #2c3e50; margin-top: 15px; text-align: left;">
+        Special Thanks to Ibu Moni Pareallo S.Th Gr.
